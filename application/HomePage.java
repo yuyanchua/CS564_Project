@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 
 public class HomePage {
 	
-	Button btInsert, btUpdate, btSearch, btCompare, btBack;
+	Button btInsert, btUpdate, btList, btSearch, btCompare, btBack;
 	
 	HBox btBox;
 	
@@ -60,6 +60,7 @@ public class HomePage {
 	private void setupBt() {
 		btInsert = new Button("Insert");
 		btUpdate = new Button("Update");
+		btList = new Button("List");
 		btSearch = new Button("Search");
 		btCompare = new Button("Compare");
 		btBack = new Button("Back");
