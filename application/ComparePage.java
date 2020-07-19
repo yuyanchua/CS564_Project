@@ -38,11 +38,12 @@ public class ComparePage {
 	
 	private void setupButton() {
 		btRanking = new Button("Show Top Nth Ranking Actors");
+		btCompare = new Button("Compare Movie");
 		btBack = new Button("Back");
 		
 		btBox = new VBox();
 		btBox.setSpacing(5);
-		btBox.getChildren().addAll(btRanking, btBack);
+		btBox.getChildren().addAll(btRanking, btCompare, btBack);
 		btBox.setAlignment(Pos.CENTER);
 		
 		btRanking.setOnAction(event);

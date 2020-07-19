@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 
 public class SearchPage {
 	
-	Button btRanking, btSearchActMovie, btSearchActor, btSearchDir, btSearchDirMovie, btRate, btBack;
+	Button btSearchActMovie, btSearchActor, btSearchDir, btSearchDirMovie, btRate, btBack;
 	Button btDisplay;
 	VBox btBox;
 	HBox hbox;
@@ -53,8 +53,6 @@ public class SearchPage {
 	}
 	
 	private void setupButton() {
-		
-//		btRanking = new Button("Show Top Nth Ranking Actors, default = 5");
 		btSearchActMovie = new Button("Search Actor by Movie");
 		btSearchActor = new Button("Search Movie by Actor");
 		btSearchDir = new Button("Search Director by Movie");
@@ -70,22 +68,6 @@ public class SearchPage {
 				btSearchDir, btSearchDirMovie, btRate, btDisplay, btBack);
 		btBox.setAlignment(Pos.CENTER);
 		
-//		btRanking.setOnAction(e -> showRanking());
-		
 		btBack.setOnAction(e -> stage.setScene(prevScene));
 	}
-	
-	
-//	private void showRanking() {
-//		int num = 5;
-//		try {
-//			num = Integer.parseInt(keyField.getText());
-//		}catch(Exception ex) {
-////			ex.printStackTrace();
-//			//errorMsg
-//			System.out.println("Please enter a number!");
-//		}
-//		new RankPage(num).showTable();
-//	}
-	
 }
