@@ -60,14 +60,18 @@ public class HomePage {
 	private void setupBt() {
 		btInsert = new Button("Insert");
 		btUpdate = new Button("Update");
-		btList = new Button("List");
+//		btList = new Button("List");
 		btSearch = new Button("Search");
 		btCompare = new Button("Compare");
 		btBack = new Button("Back");
 		
 		btInsert.setOnAction(e -> new InsertPage(stage, currScene));
 		
+//		btList.setOnAction(e -> );
+		
 		btSearch.setOnAction(e -> new SearchPage(stage, currScene));
+		
+		btCompare.setOnAction(e -> new ComparePage(stage, currScene));
 		
 		btBack.setOnAction(e -> {
 			stage.setTitle("Movie Universe");
