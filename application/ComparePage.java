@@ -30,8 +30,9 @@ public class ComparePage {
 		
 		BorderPane border = new BorderPane();
 		border.setCenter(btBox);
+		border.setStyle("-fx-background-color: #f8eadb;");
 		
-		Scene scene = new Scene(border, 500, 600);
+		Scene scene = new Scene(border, 500, 400);
 		stage.setScene(scene);
 		stage.show();
 	}

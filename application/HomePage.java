@@ -7,6 +7,10 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -41,7 +45,7 @@ public class HomePage {
 		border.setBottom(btBox);
 		
 		currScene = new Scene(border, 500, 400);
-		
+		border.setStyle("-fx-background-color: #f8eadb;");
 		stage.setScene(currScene);
 		stage.setTitle("Home Page");
 		stage.show();
@@ -51,19 +55,42 @@ public class HomePage {
 		
 		bgInfo = new Text();
 		bgInfo.setText("Movie Universe Information\n");
+		bgInfo.setFill(Color.web("#1849af"));
+		bgInfo.setFont(Font.font("Abhaya",FontPosture.ITALIC, 20));
 		
 		inst = new Text();
 		inst.setText("Program Instruction");
+		inst.setFill(Color.web("#1849af"));
+		inst.setFont(Font.font("Abhaya",FontPosture.ITALIC, 20));
 		
 	}
 	
 	private void setupBt() {
 		btInsert = new Button("Insert");
+		btInsert.setMinSize(90,20);
+		btInsert.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 18));
+		btInsert.setStyle("-fx-text-base-color: #1849af;");
+		
 		btUpdate = new Button("Update");
+		btUpdate.setMinSize(90,20);
+		btUpdate.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 18));
+		btUpdate.setStyle("-fx-text-base-color: #1849af;");
+		
 //		btList = new Button("List");
 		btSearch = new Button("Search");
+		btSearch.setMinSize(90,20);
+		btSearch.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 18));
+		btSearch.setStyle("-fx-text-base-color: #1849af;");
+		
 		btCompare = new Button("Compare");
+		btCompare.setMinSize(90,20);
+		btCompare.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 18));
+		btCompare.setStyle("-fx-text-base-color: #1849af;");
+		
 		btBack = new Button("Back");
+		btBack.setMinSize(90,20);
+		btBack.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 18));
+		btBack.setStyle("-fx-text-base-color: #1849af;");
 		
 		btInsert.setOnAction(e -> new InsertPage(stage, currScene));
 		

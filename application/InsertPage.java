@@ -36,6 +36,7 @@ public class InsertPage {
 		BorderPane border = new BorderPane();
 		border.setCenter(grid);
 		border.setBottom(btBox);
+		border.setStyle("-fx-background-color: #f8eadb;");
 		
 		Scene scene = new Scene(border, 800, 750);
 		stage = new Stage();
