@@ -57,7 +57,8 @@ public class Main extends Application {
 			root.setCenter(vbox);
 			
 			
-			root.setStyle("-fx-background-color: #f8eadb;");
+			root.setStyle("-fzx-background-color: #f8eadb;");
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.setMinHeight(400);
 			primaryStage.setMinWidth(500);
