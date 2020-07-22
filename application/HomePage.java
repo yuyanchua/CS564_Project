@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 
 public class HomePage {
 	
-	Button btInsert, btUpdate, btList, btSearch, btCompare, btBack;
+	Button btInsert, btUpdate, btDelete, btSearch, btCompare, btBack;
 	
 	HBox btBox;
 	
@@ -24,11 +24,13 @@ public class HomePage {
 	
 	Scene prevScene, currScene;
 	Stage stage;
+	boolean admin;
 	
-	public HomePage(Stage stage, Scene previous) {
+	public HomePage(Stage stage, Scene previous, boolean admin) {
 		
 		this.stage = stage;
-		prevScene = previous;
+		this.prevScene = previous;
+		this.admin = admin;
 		
 		setupBt();
 		setupText();
@@ -44,7 +46,7 @@ public class HomePage {
 		border.setCenter(textBox);
 		border.setBottom(btBox);
 		
-		currScene = new Scene(border, 500, 400);
+		currScene = new Scene(border, 600, 500);
 		border.setStyle("-fx-background-color: #f8eadb;");
 		stage.setScene(currScene);
 		stage.setTitle("Home Page");
@@ -76,6 +78,11 @@ public class HomePage {
 		btUpdate.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 18));
 		btUpdate.setStyle("-fx-text-base-color: #1849af;");
 		
+		btDelete = new Button("Delete");
+		btDelete.setMinSize(90, 20);
+		btDelete.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 18));
+		btDelete.setStyle("-fx-text-base-color: #1849af;");
+		
 //		btList = new Button("List");
 		btSearch = new Button("Search");
 		btSearch.setMinSize(90,20);
@@ -92,11 +99,13 @@ public class HomePage {
 		btBack.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 18));
 		btBack.setStyle("-fx-text-base-color: #1849af;");
 		
-		btInsert.setOnAction(e -> new InsertPage(stage, currScene));
+		btInsert.setOnAction(e -> new InsertMenu(stage, currScene, admin));
 		
-//		btList.setOnAction(e -> );
+		btUpdate.setOnAction(e -> new UpdateMenu(stage, currScene));
 		
-		btSearch.setOnAction(e -> new SearchPage(stage, currScene));
+		btDelete.setOnAction(e -> new DeleteMenu(stage, currScene));
+		
+		btSearch.setOnAction(e -> new SearchMenu(stage, currScene));
 		
 		btCompare.setOnAction(e -> new ComparePage(stage, currScene));
 		
@@ -109,9 +118,10 @@ public class HomePage {
 		btBox.setSpacing(5);
 		btBox.setPadding(new Insets(5, 5, 15, 5));
 		btBox.setAlignment(Pos.CENTER);
-		
-		btBox.getChildren().addAll(btInsert, btUpdate, btSearch, btCompare, btBack);
-		
+		if(admin)
+			btBox.getChildren().addAll(btInsert, btUpdate, btDelete, btSearch, btCompare, btBack);
+		else
+			btBox.getChildren().addAll(btInsert, btSearch, btCompare, btBack);
 		
 	}
 }

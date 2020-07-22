@@ -70,7 +70,7 @@ public class RankPage {
 	private List<Actor> getActorList(int num){
 		//Get list from database
 		List<Actor> list = new ArrayList<>();
-		list.add(new Actor("james", "James", 1));
+		list.add(new Actor(1, "james", "James", 1));
 		return list;
 	}
 }

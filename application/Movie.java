@@ -1,7 +1,7 @@
 package application;
 
 public class Movie {
-	String movieID;
+	int movieID;
 	String title;
 	int year;
 	String country;
@@ -10,7 +10,7 @@ public class Movie {
 	int RTAudRateNum;
 	
 	
-	public Movie(String movieID, String title, int year, String country, 
+	public Movie(int movieID, String title, int year, String country, 
 			double RTCriticsRating, double RTAudienceRating, int RTAudRateNum) {
 		this.movieID = movieID;
 		this.title = title;

@@ -39,7 +39,8 @@ public class Main extends Application {
 			startBt.setMinSize(200,45);
 			startBt.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 20));
 			startBt.setStyle("-fx-text-base-color: #1849af;");
-			startBt.setOnAction(e -> new HomePage(primaryStage, scene));
+//			startBt.setOnAction(e -> new HomePage(primaryStage, scene));
+			startBt.setOnAction(e -> new LoginPage(primaryStage, scene));
 			
 			VBox vbox = new VBox();
 			vbox.setSpacing(5);
@@ -57,8 +58,7 @@ public class Main extends Application {
 			root.setCenter(vbox);
 			
 			
-			root.setStyle("-fzx-background-color: #f8eadb;");
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			root.setStyle("-fx-background-color: #f8eadb;");
 			primaryStage.setScene(scene);
 			primaryStage.setMinHeight(400);
 			primaryStage.setMinWidth(500);

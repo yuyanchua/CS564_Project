@@ -4,10 +4,10 @@ public class Director {
 	
 	String directorId;
 	String directorName;
-	String movieId;
+	int movieId;
 	
 	
-	public Director(String directorId, String directorName, String movieId) {
+	public Director(String directorId, String directorName, int movieId) {
 		this.directorId = directorId;
 		this.directorName = directorName;
 		this.movieId = movieId;
