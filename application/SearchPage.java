@@ -9,6 +9,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -76,9 +78,9 @@ public class SearchPage{
 		
 		border.setCenter(textBox);
 		border.setBottom(btBox);
-		
+		border.setStyle("-fx-background-color: #f8eadb;");
 		Scene scene = new Scene(border, 500, 200);
-		
+
 		newStage = new Stage();
 		newStage.setScene(scene);
 		newStage.setTitle(title);
@@ -88,6 +90,13 @@ public class SearchPage{
 	private void setupButton() {
 		btOk = new Button("Ok");
 		btBack = new Button("Back");
+		
+		btOk.setMinSize(90,20);
+		btOk.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 15));
+		btOk.setStyle("-fx-text-base-color: #1849af;");
+		btBack.setMinSize(90,20);
+		btBack.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 15));
+		btBack.setStyle("-fx-text-base-color: #1849af;");
 		
 		btOk.setOnAction(e -> searchInput());
 		btBack.setOnAction(e -> newStage.close());
@@ -132,12 +141,41 @@ public class SearchPage{
 		String inputText = input.getText();
 		
 		//retrieve database based on Title + Prompt
-		
+		if (title.equals("Search Ranking")) {
+			showRanking(inputText);
+		}
+		else if(title.equals("Compare Movie")) {
+			showCompare(inputText);
+		}
 	}
 	
+	private void showRanking(String input) {
+		int num = 0;
+		try {
+			num = Integer.parseInt(input);
+		}catch(Exception ex) {
+			System.out.println("Please enter a number");
+		}
+		
+		if(num > 0 && num < 5)
+			new RankPage(num).showTable();
+		else
+			return;
+	}
 	
-	
-	
+	private void showCompare(String input) {
+		int num = 0; 
+		try {
+			num = Integer.parseInt(input);
+		}catch(Exception ex) {
+			
+		}
+		
+		if(num > 0 && num < 5)
+			new ComparePage(num).showTable();
+		else
+			return;
+	}
 	
 	
 }

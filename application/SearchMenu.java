@@ -46,20 +46,20 @@ public class SearchMenu {
 		
 		BorderPane border= new BorderPane();
 		
-	//	Text text = new Text();
-		//text.setText("Movie Search");
-		//text.setFill(Color.web("#1849af"));
-		//text.setFont(Font.font("Abhaya",FontPosture.ITALIC, 40));
-		//border.setTop(text);
+
 		border.setCenter(btBox);
-		Insets top = new Insets(80, 0, 0, 0);
-		BorderPane.setMargin(btBox, top);
 		
 		
 		Scene scene = new Scene(border, 500, 400);
-		border.setStyle("-fx-background-image: url('top.png');"
+		Text top = new Text();
+		top.setText("            Search Movie");
+		border.setTop(top);
+		top.setFill(Color.web("#1849af"));
+		top.setFont(Font.font("Abhaya",FontPosture.ITALIC, 41));
+		border.setPadding(new Insets(43, 0, 0, 4));
+		border.setStyle("-fx-background-image: url('title.png');"
 				+ "-fx-background-color: #f8eadb;"
-				+ "-fx-background-size: 500 150;"
+				+ "-fx-background-size: 150 150;"
 				+ "-fx-background-repeat: no-repeat;");
 		stage.setScene(scene);
 		stage.show();
@@ -95,13 +95,15 @@ public class SearchMenu {
 		btRate.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 15));
 		btRate.setStyle("-fx-text-base-color: #1849af;");
 
+		/*
 		btDisplay = new Button("Show all data");
 		btDisplay.setMinSize(200,30);
 		btDisplay.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 15));
 		btDisplay.setStyle("-fx-text-base-color: #1849af;");
-		
+		*/
 		
 		btBack = new Button("Back");
+		btBack.setMinSize(90,30);
 		btBack.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 15));
 		btBack.setStyle("-fx-text-base-color: #1849af;");
 		
@@ -114,7 +116,7 @@ public class SearchMenu {
 		btBox = new VBox();
 		btBox.setSpacing(5);
 		btBox.getChildren().addAll(btSearchActMovie, btSearchDirMovie, btSearchActor, 
-				btSearchDir, btRate, btDisplay, btBack);
+				btSearchDir, btRate, btBack);
 		btBox.setAlignment(Pos.CENTER);
 		
 		

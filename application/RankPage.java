@@ -38,7 +38,7 @@ public class RankPage {
 		border.setPadding(new Insets(10, 10, 10, 10));
 		border.setStyle("-fx-background-color: #f8eadb;");
 		
-		Scene scene = new Scene(border, 800, 800);
+		Scene scene = new Scene(border, 500, 400);
 		
 		tableStage.setScene(scene);
 		tableStage.sizeToScene();

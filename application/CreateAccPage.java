@@ -11,6 +11,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.geometry.Insets;
@@ -51,7 +53,18 @@ public class CreateAccPage {
 		border.setCenter(vbox);
 		border.setBottom(btBox);
 		
-		Scene scene = new Scene(border, 500, 600);
+		Text top = new Text();
+		top.setText("            Creat Account");
+		border.setTop(top);
+		top.setFill(Color.web("#1849af"));
+		top.setFont(Font.font("Abhaya",FontPosture.ITALIC, 41));
+		border.setPadding(new Insets(43, 0, 0, 4));
+		border.setStyle("-fx-background-image: url('title.png');"
+				+ "-fx-background-color: #f8eadb;"
+				+ "-fx-background-size: 150 150;"
+				+ "-fx-background-repeat: no-repeat;");
+		
+		Scene scene = new Scene(border, 500, 400);
 		stage.setTitle("Create new Account");
 		stage.setScene(scene);
 		stage.show();
@@ -101,7 +114,13 @@ public class CreateAccPage {
 		String username = tfUser.getText();
 
 		if(!pfPass.getText().equals(pfRepeat.getText())) {
-			errMsg.setText("Password Not Match");
+			errMsg.setText("Password not matched.");
+			errMsg.setVisible(true);
+			return;
+		}
+		
+		if(!pfPass.getText().isEmpty() ||pfRepeat.getText().isEmpty()) {
+			errMsg.setText("Username or password is not enterd.");
 			errMsg.setVisible(true);
 			return;
 		}

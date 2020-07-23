@@ -11,6 +11,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -49,8 +52,19 @@ public class UpdatePassword {
 		border.setBottom(btBox);
 		border.setPadding(new Insets(15, 15, 15, 15));
 		
+		Text top = new Text();
+		top.setText("            Change Password");
+		border.setTop(top);
+		top.setFill(Color.web("#1849af"));
+		top.setFont(Font.font("Abhaya",FontPosture.ITALIC, 41));
+		border.setPadding(new Insets(43, 0, 0, 4));
+		border.setStyle("-fx-background-image: url('title.png');"
+				+ "-fx-background-color: #f8eadb;"
+				+ "-fx-background-size: 150 150;"
+				+ "-fx-background-repeat: no-repeat;");
+		
 		stage = new Stage();
-		Scene scene = new Scene(border, 500, 500);
+		Scene scene = new Scene(border, 500, 400);
 		stage.setTitle("Change Password");
 		stage.setScene(scene);
 		stage.show();
@@ -87,6 +101,13 @@ public class UpdatePassword {
 		btConfirm = new Button("Confirm");
 		btCancel = new Button("Cancel");
 		
+		btConfirm.setMinSize(90,20);
+		btConfirm.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 15));
+		btConfirm.setStyle("-fx-text-base-color: #1849af;");
+		btCancel.setMinSize(90,20);
+		btCancel.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 15));
+		btCancel.setStyle("-fx-text-base-color: #1849af;");
+		
 		btConfirm.setOnAction(e -> changePass());
 		btCancel.setOnAction(e -> stage.close());
 		
@@ -106,6 +127,12 @@ public class UpdatePassword {
 			errorMsg.setText("Incorrect Old Password");
 		
 		errorMsg.setVisible(true);
+		if (!oldPass.isEmpty() && !newPass.isEmpty() && !confirmPass.isEmpty()) {
+			
+		}
+		else {
+			errorMsg.setText("Please don't leave any field empty.");
+		}
 	}
 	
 	private boolean validate(String oldPass) {

@@ -44,8 +44,17 @@ public class HomePage {
 		border.setCenter(textBox);
 		border.setBottom(btBox);
 		
-		currScene = new Scene(border, 600, 500);
-		border.setStyle("-fx-background-color: #f8eadb;");
+		currScene = new Scene(border, 500, 400);
+		Text top = new Text();
+		top.setText("            Home Page");
+		border.setTop(top);
+		top.setFill(Color.web("#1849af"));
+		top.setFont(Font.font("Abhaya",FontPosture.ITALIC, 41));
+		border.setPadding(new Insets(43, 0, 0, 4));
+		border.setStyle("-fx-background-image: url('title.png');"
+				+ "-fx-background-color: #f8eadb;"
+				+ "-fx-background-size: 150 150;"
+				+ "-fx-background-repeat: no-repeat;");
 		stage.setScene(currScene);
 		stage.setTitle("Home Page");
 		stage.show();
@@ -66,9 +75,9 @@ public class HomePage {
 	}
 	
 	private void setupBt() {
-		btInsert = new Button("Insert Movie Rating");
+		btInsert = new Button("Rate");
 		btInsert.setMinSize(90,20);
-		btInsert.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 18));
+		btInsert.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 15));
 		btInsert.setStyle("-fx-text-base-color: #1849af;");
 		
 //		btUpdate = new Button("Update");
@@ -84,23 +93,23 @@ public class HomePage {
 //		btList = new Button("List");
 		btSearch = new Button("Search");
 		btSearch.setMinSize(90,20);
-		btSearch.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 18));
+		btSearch.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 15));
 		btSearch.setStyle("-fx-text-base-color: #1849af;");
 		
 		btCompare = new Button("Compare");
 		btCompare.setMinSize(90,20);
-		btCompare.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 18));
+		btCompare.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 15));
 		btCompare.setStyle("-fx-text-base-color: #1849af;");
 		
 		btAccount = new Button("Account");
 		btAccount.setMinSize(90,  20);
-		btAccount.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 18));
+		btAccount.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 15));
 		btAccount.setStyle("-fx-text-base-color: #1849af;");
 		
 		
 		btBack = new Button("Back");
 		btBack.setMinSize(90,20);
-		btBack.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 18));
+		btBack.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 15));
 		btBack.setStyle("-fx-text-base-color: #1849af;");
 		
 		btInsert.setOnAction(e -> new InsertPage(stage, currScene).start());

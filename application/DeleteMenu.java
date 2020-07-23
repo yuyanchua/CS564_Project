@@ -8,14 +8,14 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class UpdateMenu {
+public class DeleteMenu {
 	Button btMovie, btActor, btDir, btBack;
 	VBox btBox;
 	
 	Stage stage;
 	Scene prevScene, scene;
 	
-	public UpdateMenu(Stage stage, Scene prevScene) {
+	public DeleteMenu(Stage stage, Scene prevScene) {
 		this.stage = stage;
 		this.prevScene = prevScene;
 		
@@ -26,16 +26,15 @@ public class UpdateMenu {
 		border.setCenter(btBox);
 		
 		Scene scene = new Scene(border, 500, 400);
-		border.setStyle("-fx-background-color: #f8eadb;");
-		stage.setTitle("Update Record");
+		stage.setTitle("Delete Record");
 		stage.setScene(scene);
 		stage.show();
 	}
 	
 	private void setupButton() {
-		btMovie = new Button("Update Movie");
-		btActor = new Button("Update Actor");
-		btDir = new Button("Update Director");
+		btMovie = new Button("Delete Movie");
+		btActor = new Button("Delete Actor");
+		btDir = new Button("Delete Director");
 		btBack = new Button("Back");
 		
 		

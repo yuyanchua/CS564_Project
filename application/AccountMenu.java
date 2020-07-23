@@ -6,6 +6,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class AccountMenu {
@@ -25,7 +30,17 @@ public class AccountMenu {
 		BorderPane border = new BorderPane();
 		border.setCenter(btBox);
 		
-		Scene scene = new Scene(border, 500, 500);
+		Scene scene = new Scene(border, 500, 400);
+		Text top = new Text();
+		top.setText("            Manage Account");
+		border.setTop(top);
+		top.setFill(Color.web("#1849af"));
+		top.setFont(Font.font("Abhaya",FontPosture.ITALIC, 41));
+		border.setPadding(new Insets(43, 0, 0, 4));
+		border.setStyle("-fx-background-image: url('title.png');"
+				+ "-fx-background-color: #f8eadb;"
+				+ "-fx-background-size: 150 150;"
+				+ "-fx-background-repeat: no-repeat;");
 		stage.setScene(scene);
 		stage.setTitle("Account");
 		stage.show();
@@ -35,6 +50,16 @@ public class AccountMenu {
 		btDetails = new Button("Account Details");
 		btUpdate = new Button("Update Password");
 		btBack = new Button("Back");
+
+		btDetails.setMinSize(90,20);
+		btDetails.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 15));
+		btDetails.setStyle("-fx-text-base-color: #1849af;");
+		btUpdate.setMinSize(90,20);
+		btUpdate.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 15));
+		btUpdate.setStyle("-fx-text-base-color: #1849af;");
+		btBack.setMinSize(90,20);
+		btBack.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 15));
+		btBack.setStyle("-fx-text-base-color: #1849af;");
 		
 		btUpdate.setOnAction(e -> new UpdatePassword());
 		btBack.setOnAction(e -> stage.setScene(prevScene));

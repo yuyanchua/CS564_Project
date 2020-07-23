@@ -11,6 +11,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -41,6 +44,9 @@ public class InsertPage {
 		this.prevStage = prevStage;
 		this.prevScene = prevScene ;
 		
+		errorMsg = new Text();
+		errorMsg.setFill(Color.RED);
+		errorMsg.setVisible(false);
 		setupGrid();
 		
 		setupUserInput();
@@ -61,10 +67,17 @@ public class InsertPage {
 		vbox.getChildren().addAll(grid, errorMsg, btBox);
 
 		border.setCenter(vbox);
-//		border.setBottom(btBox);
-		border.setStyle("-fx-background-color: #f8eadb;");
-		
-		Scene scene = new Scene(border, 800, 750);
+		Text top = new Text();
+		top.setText("            Rate A Movie");
+		border.setTop(top);
+		top.setFill(Color.web("#1849af"));
+		top.setFont(Font.font("Abhaya",FontPosture.ITALIC, 41));
+		border.setPadding(new Insets(43, 0, 0, 4));
+		border.setStyle("-fx-background-image: url('title.png');"
+				+ "-fx-background-color: #f8eadb;"
+				+ "-fx-background-size: 150 150;"
+				+ "-fx-background-repeat: no-repeat;");
+		Scene scene = new Scene(border, 500, 400);
 		stage = new Stage();
 		stage.setScene(scene);
 		stage.show();
@@ -223,11 +236,22 @@ public class InsertPage {
 	private void insertRating() {
 		String movieName = tfTitle.getText();
 		String userId = tfUserId.getText();
-		double rating = Double.parseDouble(tfRating.getText());
+		String ratingText = tfRating.getText();
 		
-		int movieId = getMovieId(movieName);
+		if (!movieName.isEmpty() && !userId.isEmpty() && !ratingText.isEmpty()) {
+			double rating = Double.parseDouble(ratingText);
+			
+			int movieId = getMovieId(movieName);
+			
+			Rate rate = new Rate(movieId, userId, rating);
+		}
+		else {
+			System.out.println("jere");
+			errorMsg.setText("Please don't leave any field empty.");
+			errorMsg.setFill(Color.RED);
+			errorMsg.setVisible(true);
+		}
 		
-		Rate rate = new Rate(movieId, userId, rating);
 	}
 	
 	
@@ -307,6 +331,13 @@ public class InsertPage {
 		
 		btAdd = new Button("Add");
 		btBack = new Button("Back");
+		
+		btAdd.setMinSize(90,20);
+		btAdd.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 15));
+		btAdd.setStyle("-fx-text-base-color: #1849af;");
+		btBack.setMinSize(90,20);
+		btBack.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 15));
+		btBack.setStyle("-fx-text-base-color: #1849af;");
 		
 		btBox.getChildren().addAll(btAdd, btBack);
 		btBox.setSpacing(5);

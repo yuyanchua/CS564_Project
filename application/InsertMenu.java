@@ -6,6 +6,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class InsertMenu {
@@ -25,6 +29,17 @@ public class InsertMenu {
 		
 		BorderPane border = new BorderPane();
 		border.setCenter(btBox);
+		
+		Text top = new Text();
+		top.setText("            Rate A Movie");
+		border.setTop(top);
+		top.setFill(Color.web("#1849af"));
+		top.setFont(Font.font("Abhaya",FontPosture.ITALIC, 41));
+		border.setPadding(new Insets(43, 0, 0, 4));
+		border.setStyle("-fx-background-image: url('title.png');"
+				+ "-fx-background-color: #f8eadb;"
+				+ "-fx-background-size: 150 150;"
+				+ "-fx-background-repeat: no-repeat;");
 		
 		Scene scene = new Scene(border, 500, 400);
 		stage.setTitle("Insert Record");
