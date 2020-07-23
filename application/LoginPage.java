@@ -110,10 +110,7 @@ public class LoginPage {
 		boolean authorize = isAuthorize(user, pass);
 
 		if(authorize) {
-			if(isAdmin(user))
-				new HomePage(stage, scene, true);
-			else
-				new HomePage(stage, scene, false);
+			new HomePage(stage, scene);
 		}else
 			lbErr.setVisible(true);
 	}
@@ -122,12 +119,6 @@ public class LoginPage {
 		if(user.equals("user") && pass.equals("pass"))
 			return true;
 		if(user.equals("admin") && pass.equals("pass"))
-			return true;
-		return false;
-	}
-	
-	private boolean isAdmin(String user) {
-		if(user.equals("admin"))
 			return true;
 		return false;
 	}

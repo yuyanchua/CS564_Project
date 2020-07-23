@@ -37,31 +37,13 @@ public class InsertPage {
 	
 	int insertType; 
 	
-	public InsertPage(Stage prevStage, Scene prevScene, int insertType) {
+	public InsertPage(Stage prevStage, Scene prevScene) {
 		this.prevStage = prevStage;
 		this.prevScene = prevScene ;
-		this.insertType = insertType;
 		
 		setupGrid();
 		
-		switch(insertType) {
-		case 0:
-			//Insert Movie
-			setupMovieInput();
-			break;
-		case 1:
-			//Insert Actor
-			setupActorInput();
-			break;
-		case 2:
-			//Insert Director
-			setupDirectorInput();
-			break;
-		case 3:
-			//Insert Rating
-			setupUserInput();
-			break;
-		}
+		setupUserInput();
 		
 	}
 	
@@ -104,116 +86,116 @@ public class InsertPage {
 		
 	}
 	
-	private void setupMovieInput() {
-		Label lbTitle = new Label("Title: ");
-		Label lbYear = new Label("Year: ");
-		Label lbCountry = new Label("Country: ");
-		Label lbRTCRating = new Label("RT Critics Rating: ");
-		Label lbRTAurRating = new Label("RT Audience Rating: ");
-		Label lbAudRateNum = new Label("RT Audience Rating Number: ");
-		
-		grid.add(lbTitle, 0, 0);
-		grid.add(lbYear, 0, 1);
-		grid.add(lbCountry, 0, 2);
-		grid.add(lbRTCRating, 0, 3);
-		grid.add(lbRTAurRating, 0, 4);
-		grid.add(lbAudRateNum, 0, 5);
-		
-		
-		tfTitle = new TextField();
-		tfYear = new TextField();
-		tfCountry = new TextField();
-		tfRTCRating = new TextField();
-		tfRTAurRating = new TextField();
-		tfAudRateNum = new TextField();
-		
-		grid.add(tfTitle, 1, 0);
-		grid.add(tfYear, 1, 1);
-		grid.add(tfCountry, 1, 2);
-		grid.add(tfRTCRating, 1, 3);
-		grid.add(tfRTAurRating, 1, 4);
-		grid.add(tfAudRateNum, 1, 5);
-	}
-	
-	private void insertMovie() {
-		
-		int movieId = 0;
-		String title = tfTitle.getText();
-		int year = Integer.parseInt(tfTitle.getText());
-		String country = tfTitle.getText();
-		double RTCriticsRating = Double.parseDouble(tfRTCRating.getText());
-		double RTAudienceRating = Double.parseDouble(tfRTAurRating.getText());
-		int RTAudRateNum = Integer.parseInt(tfAudRateNum.getText());
-		
-		Movie movie = new Movie(movieId, title, year, country, RTCriticsRating, 
-				RTAudienceRating, RTAudRateNum);
-		
-		//insert movie into database
-		
-	}
-	
-	private void setupDirectorInput() {
-		Label lbDirectorName = new Label("Director Name: ");
-		Label lbMovie = new Label("Directed Movie: ");
-		
-		grid.add(lbDirectorName, 0, 0);
-		grid.add(lbMovie, 0, 1);
-		
-		tfDirectorName = new TextField();
-		tfTitle = new TextField();
-		
-		grid.add(tfDirectorName, 1, 0);
-		grid.add(tfTitle, 1, 1);
-	}
-	
-	private void insertDirector() {
-		String directorName = tfDirectorName.getText();
-		String directorId = directorName.toLowerCase().replace(" ", "_");
-		String movieName = tfTitle.getText();
-		
-		int movieId = getMovieId(movieName);
-		
-		Director director = new Director(directorId, directorName, movieId);
-		
-		
-	}
-	
-	
-	
-	private void setupActorInput() {
-		Label lbActorName = new Label("Actor Name: ");
-		Label lbRanking = new Label("Ranking: ");
-		Label lbMovie = new Label("Acted Movie: ");
-		
-		grid.add(lbActorName, 0, 0);
-		grid.add(lbRanking, 0, 1);
-		grid.add(lbMovie, 0, 2);
-		
-		tfActorName = new TextField();
-		tfRanking = new TextField();
-		tfTitle = new TextField();
-		
-		grid.add(tfActorName, 1, 0);
-		grid.add(tfRanking, 1, 1);
-		grid.add(tfTitle, 1, 2);
-		
-	}
-	
-	private void insertActor() {
-		try {
-			String movie = tfTitle.getText();
-			String actorName = tfActorName.getText();
-			int ranking = Integer.parseInt(tfRanking.getText());
-			String actorId = actorName.toLowerCase().replace(" ", "_");
-
-			int movieId = getMovieId(movie);
-			
-			Actor actor = new Actor(movieId, actorId, actorName, ranking);
-		}catch(Exception ex) {
-			errorMsg.setVisible(true);
-		}
-
-	}
+//	private void setupMovieInput() {
+//		Label lbTitle = new Label("Title: ");
+//		Label lbYear = new Label("Year: ");
+//		Label lbCountry = new Label("Country: ");
+//		Label lbRTCRating = new Label("RT Critics Rating: ");
+//		Label lbRTAurRating = new Label("RT Audience Rating: ");
+//		Label lbAudRateNum = new Label("RT Audience Rating Number: ");
+//		
+//		grid.add(lbTitle, 0, 0);
+//		grid.add(lbYear, 0, 1);
+//		grid.add(lbCountry, 0, 2);
+//		grid.add(lbRTCRating, 0, 3);
+//		grid.add(lbRTAurRating, 0, 4);
+//		grid.add(lbAudRateNum, 0, 5);
+//		
+//		
+//		tfTitle = new TextField();
+//		tfYear = new TextField();
+//		tfCountry = new TextField();
+//		tfRTCRating = new TextField();
+//		tfRTAurRating = new TextField();
+//		tfAudRateNum = new TextField();
+//		
+//		grid.add(tfTitle, 1, 0);
+//		grid.add(tfYear, 1, 1);
+//		grid.add(tfCountry, 1, 2);
+//		grid.add(tfRTCRating, 1, 3);
+//		grid.add(tfRTAurRating, 1, 4);
+//		grid.add(tfAudRateNum, 1, 5);
+//	}
+//	
+//	private void insertMovie() {
+//		
+//		int movieId = 0;
+//		String title = tfTitle.getText();
+//		int year = Integer.parseInt(tfTitle.getText());
+//		String country = tfTitle.getText();
+//		double RTCriticsRating = Double.parseDouble(tfRTCRating.getText());
+//		double RTAudienceRating = Double.parseDouble(tfRTAurRating.getText());
+//		int RTAudRateNum = Integer.parseInt(tfAudRateNum.getText());
+//		
+//		Movie movie = new Movie(movieId, title, year, country, RTCriticsRating, 
+//				RTAudienceRating, RTAudRateNum);
+//		
+//		//insert movie into database
+//		
+//	}
+//	
+//	private void setupDirectorInput() {
+//		Label lbDirectorName = new Label("Director Name: ");
+//		Label lbMovie = new Label("Directed Movie: ");
+//		
+//		grid.add(lbDirectorName, 0, 0);
+//		grid.add(lbMovie, 0, 1);
+//		
+//		tfDirectorName = new TextField();
+//		tfTitle = new TextField();
+//		
+//		grid.add(tfDirectorName, 1, 0);
+//		grid.add(tfTitle, 1, 1);
+//	}
+//	
+//	private void insertDirector() {
+//		String directorName = tfDirectorName.getText();
+//		String directorId = directorName.toLowerCase().replace(" ", "_");
+//		String movieName = tfTitle.getText();
+//		
+//		int movieId = getMovieId(movieName);
+//		
+//		Director director = new Director(directorId, directorName, movieId);
+//		
+//		
+//	}
+//	
+//	
+//	
+//	private void setupActorInput() {
+//		Label lbActorName = new Label("Actor Name: ");
+//		Label lbRanking = new Label("Ranking: ");
+//		Label lbMovie = new Label("Acted Movie: ");
+//		
+//		grid.add(lbActorName, 0, 0);
+//		grid.add(lbRanking, 0, 1);
+//		grid.add(lbMovie, 0, 2);
+//		
+//		tfActorName = new TextField();
+//		tfRanking = new TextField();
+//		tfTitle = new TextField();
+//		
+//		grid.add(tfActorName, 1, 0);
+//		grid.add(tfRanking, 1, 1);
+//		grid.add(tfTitle, 1, 2);
+//		
+//	}
+//	
+//	private void insertActor() {
+//		try {
+//			String movie = tfTitle.getText();
+//			String actorName = tfActorName.getText();
+//			int ranking = Integer.parseInt(tfRanking.getText());
+//			String actorId = actorName.toLowerCase().replace(" ", "_");
+//
+//			int movieId = getMovieId(movie);
+//			
+//			Actor actor = new Actor(movieId, actorId, actorName, ranking);
+//		}catch(Exception ex) {
+//			errorMsg.setVisible(true);
+//		}
+//
+//	}
 	
 	private int getMovieId(String movie) {
 		return -1;
@@ -331,6 +313,7 @@ public class InsertPage {
 		btBox.setPadding(new Insets(5, 5, 5, 5));
 		btBox.setAlignment(Pos.CENTER);
 //		btBack.setOnAction(e -> prevStage.setScene(prevScene));
+		btAdd.setOnAction(e -> insertRating());
 		btBack.setOnAction(e -> stage.close());
 	}
 	

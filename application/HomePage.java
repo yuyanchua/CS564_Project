@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 
 public class HomePage {
 	
-	Button btInsert, btUpdate, btDelete, btSearch, btCompare, btBack;
+	Button btInsert, btSearch, btCompare, btAccount, btBack;
 	
 	HBox btBox;
 	
@@ -24,13 +24,11 @@ public class HomePage {
 	
 	Scene prevScene, currScene;
 	Stage stage;
-	boolean admin;
 	
-	public HomePage(Stage stage, Scene previous, boolean admin) {
+	public HomePage(Stage stage, Scene previous) {
 		
 		this.stage = stage;
 		this.prevScene = previous;
-		this.admin = admin;
 		
 		setupBt();
 		setupText();
@@ -68,20 +66,20 @@ public class HomePage {
 	}
 	
 	private void setupBt() {
-		btInsert = new Button("Insert");
+		btInsert = new Button("Insert Movie Rating");
 		btInsert.setMinSize(90,20);
 		btInsert.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 18));
 		btInsert.setStyle("-fx-text-base-color: #1849af;");
 		
-		btUpdate = new Button("Update");
-		btUpdate.setMinSize(90,20);
-		btUpdate.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 18));
-		btUpdate.setStyle("-fx-text-base-color: #1849af;");
-		
-		btDelete = new Button("Delete");
-		btDelete.setMinSize(90, 20);
-		btDelete.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 18));
-		btDelete.setStyle("-fx-text-base-color: #1849af;");
+//		btUpdate = new Button("Update");
+//		btUpdate.setMinSize(90,20);
+//		btUpdate.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 18));
+//		btUpdate.setStyle("-fx-text-base-color: #1849af;");
+//		
+//		btDelete = new Button("Delete");
+//		btDelete.setMinSize(90, 20);
+//		btDelete.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 18));
+//		btDelete.setStyle("-fx-text-base-color: #1849af;");
 		
 //		btList = new Button("List");
 		btSearch = new Button("Search");
@@ -94,20 +92,29 @@ public class HomePage {
 		btCompare.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 18));
 		btCompare.setStyle("-fx-text-base-color: #1849af;");
 		
+		btAccount = new Button("Account");
+		btAccount.setMinSize(90,  20);
+		btAccount.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 18));
+		btAccount.setStyle("-fx-text-base-color: #1849af;");
+		
+		
 		btBack = new Button("Back");
 		btBack.setMinSize(90,20);
 		btBack.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 18));
 		btBack.setStyle("-fx-text-base-color: #1849af;");
 		
-		btInsert.setOnAction(e -> new InsertMenu(stage, currScene, admin));
+		btInsert.setOnAction(e -> new InsertPage(stage, currScene).start());
 		
-		btUpdate.setOnAction(e -> new UpdateMenu(stage, currScene));
-		
-		btDelete.setOnAction(e -> new DeleteMenu(stage, currScene));
+//		btUpdate.setOnAction(e -> new UpdateMenu(stage, currScene));
+//		
+//		btDelete.setOnAction(e -> new DeleteMenu(stage, currScene));
 		
 		btSearch.setOnAction(e -> new SearchMenu(stage, currScene));
 		
-		btCompare.setOnAction(e -> new ComparePage(stage, currScene));
+		btCompare.setOnAction(e -> new CompareMenu(stage, currScene));
+		
+		btAccount.setOnAction(e -> new AccountMenu(stage, currScene));
+		
 		
 		btBack.setOnAction(e -> {
 			stage.setTitle("Movie Universe");
@@ -118,10 +125,6 @@ public class HomePage {
 		btBox.setSpacing(5);
 		btBox.setPadding(new Insets(5, 5, 15, 5));
 		btBox.setAlignment(Pos.CENTER);
-		if(admin)
-			btBox.getChildren().addAll(btInsert, btUpdate, btDelete, btSearch, btCompare, btBack);
-		else
-			btBox.getChildren().addAll(btInsert, btSearch, btCompare, btBack);
-		
+		btBox.getChildren().addAll(btInsert, btSearch, btCompare, btAccount, btBack);
 	}
 }

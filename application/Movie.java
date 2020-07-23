@@ -1,18 +1,18 @@
 package application;
 
 public class Movie {
-	int movieID;
-	String title;
-	int year;
-	String country;
-	double RTCriticsRating;
-	double RTAudienceRating;
-	int RTAudRateNum;
+	private int movieId;
+	private String title;
+	private int year;
+	private String country;
+	private double RTCriticsRating;
+	private double RTAudienceRating;
+	private int RTAudRateNum;
 	
 	
-	public Movie(int movieID, String title, int year, String country, 
+	public Movie(int movieId, String title, int year, String country, 
 			double RTCriticsRating, double RTAudienceRating, int RTAudRateNum) {
-		this.movieID = movieID;
+		this.movieId = movieId;
 		this.title = title;
 		this.year = year;
 		this.country = country;
@@ -20,4 +20,36 @@ public class Movie {
 		this.RTAudienceRating = RTAudienceRating;
 		this.RTAudRateNum = RTAudRateNum;
 	}
+
+
+	public int getMovieId() {
+		return movieId;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public int getYear() {
+		return year;
+	}
+
+	public double getRTCriticsRating() {
+		return RTCriticsRating;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+
+	public double getRTAudienceRating() {
+		return RTAudienceRating;
+	}
+
+
+	public int getRTAudRateNum() {
+		return RTAudRateNum;
+	}
+
 }

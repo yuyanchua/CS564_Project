@@ -1,76 +1,99 @@
 package application;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Pos;
+import java.util.ArrayList;
+import java.util.List;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class ComparePage {
-	Stage stage;
-	Scene prevScene;
 	
-	Button btRanking, btCompare, btBack;
+	List<Movie> movieList;
+	TableView<Movie> movieTable;
+	ObservableList<Movie> records;
 	
-	TextInputDialog dialog;
-	EventHandler<ActionEvent> event;
-	VBox btBox;
+	int numRecord;
 	
-	public ComparePage(Stage stage, Scene prevScene) {
-		this.stage = stage;
-		this.prevScene = prevScene;
-		
-		setupDialog();
-		setupButton();
-		
+	public ComparePage(int num) {
+		//Search for records
+		this.numRecord = num;
+		movieList = searchMovie(num);
+		records = FXCollections.observableArrayList(movieList);
+		setupTable();
+	}
+	
+	public void showTable() {
+		Stage tableStage = new Stage();
 		
 		BorderPane border = new BorderPane();
-		border.setCenter(btBox);
-		border.setStyle("-fx-background-color: #f8eadb;");
+		border.setCenter(movieTable);
 		
-		Scene scene = new Scene(border, 500, 400);
-		stage.setScene(scene);
-		stage.show();
+		border.setPadding(new Insets(10, 10, 10, 10));
+		
+		Scene scene = new Scene(border, 1400, 800);
+		tableStage.setScene(scene);
+		tableStage.sizeToScene();
+		tableStage.show();
 	}
 	
-	private void setupButton() {
-		btRanking = new Button("Show Top Nth Ranking Actors");
-		btCompare = new Button("Compare Movie");
-		btBack = new Button("Back");
+	private List<Movie> searchMovie(int num){
+		List<Movie> movieList = new ArrayList<>();
+		Movie movie1 = new Movie(1, "Test", 2000, "Test", 5.5, 5.5, 5);
+		Movie movie2 = new Movie(2, "Test1", 2001, "Test1", 5.51, 5.15, 15);
 		
-		btBox = new VBox();
-		btBox.setSpacing(5);
-		btBox.getChildren().addAll(btRanking, btCompare, btBack);
-		btBox.setAlignment(Pos.CENTER);
+		movieList.add(movie1);
+		movieList.add(movie2);
 		
-		btRanking.setOnAction(event);
-		btBack.setOnAction(e -> stage.setScene(prevScene));
+		return movieList;
 	}
 	
-	private void setupDialog() {
-		dialog = new TextInputDialog();
-		dialog.setHeaderText("Show Actor Ranking of Top?");
-		dialog.setContentText("Enter a number");
-		event = new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent e) {
-				dialog.showAndWait();
-				showRanking();
-			}
-		};
-	}
 	
-	private void showRanking() {
-		int num = 0;
-		try {
-			num = Integer.parseInt(dialog.getEditor().getText());
-		}catch(Exception ex) {
-			System.out.println("Please enter a number");
-		}
+//	int movieID;
+//	String title;
+//	int year;
+//	String country;
+//	double RTCriticsRating;
+//	double RTAudienceRating;
+//	int RTAudRateNum;
+	
+	@SuppressWarnings("unchecked")
+	private void setupTable() {
+		movieTable = new TableView<>();
+		movieTable.setEditable(false);
 		
-		new RankPage(num).showTable();
+		TableColumn<Movie, Integer> movieId = new TableColumn<>("MovieId");
+		movieId.setCellValueFactory(new PropertyValueFactory<>("movieId"));
+		movieId.setMaxWidth(100);
+		movieId.setMinWidth(90);
+		TableColumn<Movie, String> title = new TableColumn<>("Title");
+		title.setCellValueFactory(new PropertyValueFactory<>("title"));
+		
+		TableColumn<Movie, Integer> year = new TableColumn<>("Year");
+		year.setCellValueFactory(new PropertyValueFactory<>("year"));
+		
+		TableColumn<Movie, String> country = new TableColumn<>("Country");
+		country.setCellValueFactory(new PropertyValueFactory<>("country"));
+		
+		TableColumn<Movie, Double> rtCritRate = new TableColumn<>("RT Critics Rating");
+		rtCritRate.setCellValueFactory(new PropertyValueFactory<>("RTCriticsRating"));
+		
+		TableColumn<Movie, Double> rtAudRate = new TableColumn<>("RT Audience Rating");
+		rtAudRate.setCellValueFactory(new PropertyValueFactory<>("RTAudienceRating"));
+		
+		TableColumn<Movie, Integer> rtAudRateNum = new TableColumn<>("RT Audience Rating Number");
+		rtAudRateNum.setCellValueFactory(new PropertyValueFactory<>("RTAudRateNum"));
+		
+		movieTable.setItems(records);
+		movieTable.getColumns().addAll(movieId, title, year, country, rtCritRate, rtAudRate, rtAudRateNum);
+		
+		movieTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+	
 	}
 }

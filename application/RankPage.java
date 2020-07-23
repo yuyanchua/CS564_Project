@@ -44,12 +44,12 @@ public class RankPage {
 		tableStage.sizeToScene();
 		tableStage.show();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	private void setupTable() {
 		actorTable = new TableView<>();
 		
-		System.out.println(record.get(0));
+//		System.out.println(record.get(0));
 		actorTable.setEditable(false);
 		TableColumn<Actor, Integer> ranking = new TableColumn<>("Ranking");
 		ranking.setCellValueFactory(

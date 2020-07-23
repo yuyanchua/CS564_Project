@@ -8,44 +8,46 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class InsertMenu {
-	Button btRate, btBack;
+public class AccountMenu {
+	Button btDetails, btUpdate, btBack;
+	
 	VBox btBox;
 	
 	Stage stage;
-	Scene prevScene, scene;
-	boolean admin;
-	
-	public InsertMenu(Stage stage, Scene prevScene) {
+	Scene prevScene;
+	public AccountMenu(Stage stage, Scene prevScene) {
 		this.stage = stage;
 		this.prevScene = prevScene;
 		
 		setupButton();
-		setupVbox();
+		setupBox();
 		
 		BorderPane border = new BorderPane();
 		border.setCenter(btBox);
 		
-		Scene scene = new Scene(border, 500, 400);
-		stage.setTitle("Insert Record");
+		Scene scene = new Scene(border, 500, 500);
 		stage.setScene(scene);
+		stage.setTitle("Account");
 		stage.show();
 	}
 	
 	private void setupButton() {
-		btRate = new Button("Insert Movie Rating");
+		btDetails = new Button("Account Details");
+		btUpdate = new Button("Update Password");
 		btBack = new Button("Back");
 		
-		btRate.setOnAction(e -> new InsertPage(stage, scene).start());
-		
+		btUpdate.setOnAction(e -> new UpdatePassword());
 		btBack.setOnAction(e -> stage.setScene(prevScene));
 	}
 	
-	private void setupVbox() {
-		btBox =  new VBox();
+	private void setupBox() {
+		btBox = new VBox();
 		btBox.setSpacing(15);
-		btBox.setPadding(new Insets(5, 5, 5, 5));
-		btBox.getChildren().addAll(btRate, btBack);
+		btBox.setPadding(new Insets(15, 15, 15, 15));
 		btBox.setAlignment(Pos.CENTER);
+		btBox.getChildren().addAll(btDetails, btUpdate, btBack);
 	}
+	
+	
+	
 }
