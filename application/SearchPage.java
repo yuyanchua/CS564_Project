@@ -1,5 +1,7 @@
 package application;
 
+import java.util.List;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -25,8 +27,15 @@ public class SearchPage{
 	Text promptTxt, errTxt;
 	TextField input;
 	
+	Text movieText;
+	TextField inputMovie;
+	
 	HBox btBox;
 	VBox textBox;
+	
+	ComparePage comparePage = null;
+	
+	boolean compare = false;
 	
 //	int searchType;
 	
@@ -38,36 +47,18 @@ public class SearchPage{
 //		this.searchType = searchType;
 		this.title = title;
 		this.promptStr = promptStr;
-//		
-//		switch(searchType) {
-//			//setTitle, searchFunction
-//		case 0: //Search Actor's film
-////			System.out.println("Search Actor's film");
-//			title = "Search Filmography";
-//			promptStr = "Actor's Name";
-//			break;
-//	
-//		case 1: //Search movie cast
-//			title = "Search Movie Cast";
-//			promptStr = "Movie Name";
-//			break;
-//			
-//		case 2: //Search movie Director
-//			title = "Search Movie Director";
-//			promptStr = "Movie Name";
-//			break;
-//	
-//		case 3: //Search Director's film
-//			title = "Search Filmography";
-//			promptStr = "Director's Name";
-//			break;
-//			
-//		case 4: //Find Movie Rating
-//			title = "Search Rating";
-//			promptStr = "Movie Name";
-//		}
-		
+		compare = false;
 	}
+	
+	
+	public SearchPage(ComparePage comparePage) {
+		this.compare = true;
+		this.comparePage = comparePage;
+		this.title = "Search Filmography";
+		this.promptStr = "Movie Name";
+	}
+	
+	
 	
 	public void start() {
 		
@@ -79,7 +70,7 @@ public class SearchPage{
 		border.setCenter(textBox);
 		border.setBottom(btBox);
 		border.setStyle("-fx-background-color: #f8eadb;");
-		Scene scene = new Scene(border, 500, 200);
+		Scene scene = new Scene(border, 500, 300);
 
 		newStage = new Stage();
 		newStage.setScene(scene);
@@ -98,7 +89,10 @@ public class SearchPage{
 		btBack.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 15));
 		btBack.setStyle("-fx-text-base-color: #1849af;");
 		
-		btOk.setOnAction(e -> searchInput());
+		if(compare)
+			btOk.setOnAction(e -> returnOutput());
+		else
+			btOk.setOnAction(e -> searchInput());
 		btBack.setOnAction(e -> newStage.close());
 		
 		btBox = new HBox();
@@ -115,10 +109,17 @@ public class SearchPage{
 		
 		input = new TextField();
 		input.setPromptText(promptStr);
-		
+
+		if(title.equals("Search Ranking")) {
+			movieText = new Text();
+			movieText.setText("Enter Movie Name: ");
+			
+			inputMovie = new TextField();
+			inputMovie.setPromptText("Movie Name");
+		}
 		
 		errTxt = new Text();
-		errTxt.setText("Invalid input. Please try again!");
+		
 		errTxt.setVisible(false);
 		errTxt.setFill(Color.RED);
 		
@@ -126,14 +127,44 @@ public class SearchPage{
 		textBox.setPadding(new Insets(15, 15, 15, 15));
 		textBox.setSpacing(5);
 		textBox.setAlignment(Pos.CENTER_LEFT);
-		textBox.getChildren().addAll(promptTxt, input, errTxt);
 		
+		if(title.equals("Search Ranking")) {
+			movieText = new Text();
+			movieText.setText("Enter Movie Name: ");
+			
+			inputMovie = new TextField();
+			inputMovie.setPromptText("Movie Name");
+			textBox.getChildren().addAll(promptTxt, input, movieText, inputMovie, errTxt);
+		}else
+			textBox.getChildren().addAll(promptTxt, input, errTxt);
+		
+	}
+	
+	private Movie returnOutput() {
+		if(input.getText().isEmpty()) {
+			errTxt.setText("Empty input. Please try again!");
+			errTxt.setVisible(true);
+			return null;
+		}
+
+		String inputText = input.getText();
+
+		Movie movie = new Database().retrieveMovie(inputText, 1);
+		if(movie == null) {
+			notFound();
+			return null;
+		}
+
+		comparePage.movieList.add(movie);
+		return movie;
+
 	}
 	
 	private void searchInput() {
 //		System.out.println(input.getText());
 		if(input.getText().isEmpty()) {
 //			System.out.println("null");
+			errTxt.setText("Empty input. Please try again!");
 			errTxt.setVisible(true);
 			return;
 		}
@@ -141,15 +172,75 @@ public class SearchPage{
 		String inputText = input.getText();
 		
 		//retrieve database based on Title + Prompt
-		if (title.equals("Search Ranking")) {
-			showRanking(inputText);
+		
+		if(title.equals("Search Filmography") && promptStr.equals("Actor's Name")) {
+			//search movie with actor
+			Movie movie = new Database().retrieveMovie(inputText, 2);
+			if(movie == null) {
+				notFound();
+				return;
+			}
+			
+			new ResultPage(movie, inputText, true).start();
 		}
+		
+		if(title.equals("Search Movie Cast") && promptStr.equalsIgnoreCase("Movie Name")) {
+			List<Actor> actorList = new Database().retrieveActor(inputText);
+			
+			if(actorList == null || actorList.isEmpty()) {
+				notFound();
+				return;
+			}
+			new ResultPage(actorList, inputText).start();
+		}
+		
+		if(title.equals("Search Movie Director") && promptStr.equalsIgnoreCase("Movie Name")) {
+			Director director = new Database().retrieveDirector(inputText);
+			
+			if(director == null) {
+				notFound();
+				return;
+			}
+			
+			new ResultPage(director, inputText).start();
+		}
+		
+		if(title.equals("Search Filmography") && promptStr.equalsIgnoreCase("Director's Name")) {
+			Movie movie = new Database().retrieveMovie(inputText, 3);
+			if(movie == null) {
+				notFound();
+				return;
+			}
+			
+			new ResultPage(movie, inputText, false).start();
+		}
+		
+		if(title.equals("Search Rating") && promptStr.equalsIgnoreCase("Movie Name")) {
+			Movie movie = new Database().retrieveMovie(inputText, 1);
+			double rating = new Database().retrieveRating(movie);
+			
+			if(movie == null) {
+				notFound();
+				return;
+			}
+			
+			new ResultPage(rating, inputText).start();
+			
+		}
+		
+		if (title.equals("Search Ranking")) {
+			String movieName = inputMovie.getText();
+			showRanking(inputText, movieName);
+		}
+		
 		else if(title.equals("Compare Movie")) {
 			showCompare(inputText);
 		}
+		
+		newStage.close();
 	}
 	
-	private void showRanking(String input) {
+	private void showRanking(String input, String name) {
 		int num = 0;
 		try {
 			num = Integer.parseInt(input);
@@ -158,7 +249,7 @@ public class SearchPage{
 		}
 		
 		if(num > 0 && num < 5)
-			new RankPage(num).showTable();
+			new RankPage(num, name).showTable();
 		else
 			return;
 	}
@@ -177,5 +268,9 @@ public class SearchPage{
 			return;
 	}
 	
+	private void notFound() {
+		errTxt.setText("Result not found. Please try again!");
+		errTxt.setVisible(true);
+	}
 	
 }

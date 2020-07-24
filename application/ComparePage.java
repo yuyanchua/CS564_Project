@@ -45,11 +45,19 @@ public class ComparePage {
 	
 	private List<Movie> searchMovie(int num){
 		List<Movie> movieList = new ArrayList<>();
-		Movie movie1 = new Movie(1, "Test", 2000, "Test", 5.5, 5.5, 5);
-		Movie movie2 = new Movie(2, "Test1", 2001, "Test1", 5.51, 5.15, 15);
+		try {
+			for(int i = 0; i < num; i ++) {
+				new SearchPage(this);
+			}
+		}catch(Exception ex) {
+			Movie movie1 = new Movie(1, "Test", 2000, "Test", 5.5, 5.5, 5);
+			Movie movie2 = new Movie(2, "Test1", 2001, "Test1", 5.51, 5.15, 15);
+			
+			movieList.add(movie1);
+			movieList.add(movie2);
+			
+		}
 		
-		movieList.add(movie1);
-		movieList.add(movie2);
 		
 		return movieList;
 	}

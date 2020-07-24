@@ -142,304 +142,304 @@ public class SearchMenu {
 		btBack.setOnAction(e -> stage.setScene(prevScene));
 	}
 	
-	private void searchDirector() {
-		// Create the custom dialog.
-		Dialog<String> dialog = new Dialog<>();
-		dialog.setTitle("Search Filmography");
-		dialog.setHeaderText("Enter the director's name :");
-
-		// Set the button types.
-		ButtonType ok = new ButtonType("OK", ButtonData.OK_DONE);
-		dialog.getDialogPane().getButtonTypes().addAll(ok, ButtonType.CANCEL);
-
-		GridPane gridPane = new GridPane();
-		gridPane.setHgap(10);
-		gridPane.setVgap(10);
-		gridPane.setPadding(new Insets(20, 150, 10, 10));
-
-		TextField movie = new TextField();
-		movie.setPromptText("Director name");
-
-		gridPane.add(movie, 0, 0);
-		
-		Text print = new Text();
-		print.setText("You haven't enter any input. Please try again.\n");
-//		print.setVisible(false);
-		print.setFill(Color.RED);
-		gridPane.add(print, 0, 1);
-
-
-		dialog.getDialogPane().setContent(gridPane);
-
-		dialog.setResultConverter(dialogButton -> {
-			if (dialogButton == ok) {
-				return new String(movie.getText());
-			}
-			return null;
-		});
-
-		Optional<String> result = dialog.showAndWait();
-		if (result.isPresent() && result.get().equals("111")) {
-			invalid();
-		}
-		if (result.isPresent() && result.get().isEmpty()) {
-			invalid();
-		}
-		if (result.isPresent() && !result.get().isEmpty()) {
-			director(result.get());
-		}
-	
-	}
-	
-	private void director(String name) {
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Director's Filomography");
-		alert.setHeaderText(name + " directs following movies:");
-		String result = "Movie 3, Movie 4";
-		alert.setContentText(result);
-		alert.showAndWait();
-	}
-	
-	private void searchActor() {
-		// Create the custom dialog.
-
-
-		Dialog<String> dialog = new Dialog<>();
-		dialog.setTitle("Search Filmography");
-		dialog.setHeaderText("Enter the actor's name :");
-
-		ButtonType submit = new ButtonType("ok", ButtonData.OTHER);
-		dialog.getDialogPane().getButtonTypes().addAll(submit, ButtonType.CANCEL);
-		
-		Button sub = (Button) dialog.getDialogPane().lookupButton(submit);
-
-		GridPane gridPane = new GridPane();
-		
-		gridPane.setHgap(10);
-		gridPane.setVgap(10);
-		gridPane.setPadding(new Insets(20, 150, 10, 10));
-
-		TextField movie = new TextField();
-		movie.setPromptText("Actor name");
-		gridPane.add(movie, 0, 0);
-		
-		
-		final Text output = new Text();
-		gridPane.add(output, 0, 1);
-		
-		sub.addEventFilter(ActionEvent.ACTION, e ->{
-			if (movie.getText() != null && !movie.getText().isEmpty()) {
-				dialog.setContentText("gessssupppp");
-				//output.setText(movie.getText() + " participates in:\n" + "Movie1, Movie 2");
-				//output.setFill(Color.BLACK);
-			}
-			else {
-				output.setText("You haven't enter any input. Please try again.");
-				output.setFill(Color.RED);
-			}
-		});
-		
-		Button ok = new Button("OK");
-		Button cancel = new Button("Cancel");
-		HBox hb = new HBox();
-		hb.getChildren().addAll(ok,cancel);
-		
-		hb.setAlignment(Pos.BOTTOM_RIGHT);
-		gridPane.add(hb, 1, 2);
-		cancel.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				dialog.close();
-			}
-		});
-		ok.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				if (movie.getText() != null && !movie.getText().isEmpty()) {
-					output.setText(movie.getText() + " participates in:\n" + "Movie1, Movie 2");
-					output.setFill(Color.BLACK);
-				}
-				else {
-					output.setText("You haven't enter any input. Please try again.");
-					output.setFill(Color.RED);
-				}
-			}
-		});
-		dialog.getDialogPane().setContent(gridPane);
-		
-		Optional<String> result = dialog.showAndWait();
-	
-	}
-	
-	private void actor(String name) {
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Actor's Filomography");
-		alert.setHeaderText(name + " participates in following movies:");
-		String result = "Movie 1, Movie 2";
-		alert.setContentText(result);
-		alert.showAndWait();
-	}
-	
-	private void searchActMovie() {
-		// Create the custom dialog.
-		Dialog<String> dialog = new Dialog<>();
-		dialog.setTitle("Search Movie Cast");
-		dialog.setHeaderText("Enter the movie name :");
-
-		// Set the button types.
-		ButtonType ok = new ButtonType("OK", ButtonData.OK_DONE);
-		dialog.getDialogPane().getButtonTypes().addAll(ok, ButtonType.CANCEL);
-
-		GridPane gridPane = new GridPane();
-		gridPane.setHgap(10);
-		gridPane.setVgap(10);
-		gridPane.setPadding(new Insets(20, 150, 10, 10));
-
-		TextField movie = new TextField();
-		movie.setPromptText("Movie name");
-
-		gridPane.add(movie, 0, 0);
-
-		dialog.getDialogPane().setContent(gridPane);
-
-		dialog.setResultConverter(dialogButton -> {
-			if (dialogButton == ok) {
-				return new String(movie.getText());
-			}
-			return null;
-		});
-
-		Optional<String> result = dialog.showAndWait();
-		if (result.isPresent() && result.get().equals("111")) {
-			invalid();
-		}
-		if (result.isPresent() && result.get().isEmpty()) {
-			invalid();
-		}
-		if (result.isPresent() && !result.get().isEmpty()) {
-			starringAct(result.get());
-		}
-	
-	}
-	
-	private void starringAct(String movie) {
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Movie Cast");
-		alert.setHeaderText("Here is the cast of "+ movie);
-		String result = "Actor A, Actor B, Actor C";
-		alert.setContentText(result);
-		alert.showAndWait();
-	}
-	
-	private void searchDirMovie() {
-		// Create the custom dialog.
-		Dialog<String> dialog = new Dialog<>();
-		dialog.setTitle("Search Movie Director");
-		dialog.setHeaderText("Enter the movie name :");
-
-		// Set the button types.
-		ButtonType ok = new ButtonType("OK", ButtonData.OK_DONE);
-		dialog.getDialogPane().getButtonTypes().addAll(ok, ButtonType.CANCEL);
-
-		GridPane gridPane = new GridPane();
-		gridPane.setHgap(10);
-		gridPane.setVgap(10);
-		gridPane.setPadding(new Insets(20, 150, 10, 10));
-
-		TextField movie = new TextField();
-		movie.setPromptText("Movie name");
-
-		gridPane.add(movie, 0, 0);
-
-		dialog.getDialogPane().setContent(gridPane);
-
-		dialog.setResultConverter(dialogButton -> {
-			if (dialogButton == ok) {
-				return new String(movie.getText());
-			}
-			return null;
-		});
-
-		Optional<String> result = dialog.showAndWait();
-		if (result.isPresent() && result.get().equals("111")) {
-			invalid();
-		}
-		if (result.isPresent() && result.get().isEmpty()) {
-			invalid();
-		}
-		if (result.isPresent() && !result.get().isEmpty()) {
-			directingDir(result.get());
-		}
-	
-	}
-	
-	private void directingDir(String movie) {
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Movie Director");
-		alert.setHeaderText("Here is the director of "+ movie);
-		String result = "Director John, Director Jane";
-		alert.setContentText(result);
-		alert.showAndWait();
-	}
-	
-	private void searchRating() {
-		// Create the custom dialog.
-		Dialog<String> dialog = new Dialog<>();
-		dialog.setTitle("Search Rating");
-		dialog.setHeaderText("Enter the movie name :");
-
-		// Set the button types.
-		ButtonType ok = new ButtonType("OK", ButtonData.OK_DONE);
-		dialog.getDialogPane().getButtonTypes().addAll(ok, ButtonType.CANCEL);
-
-		GridPane gridPane = new GridPane();
-		gridPane.setHgap(10);
-		gridPane.setVgap(10);
-		gridPane.setPadding(new Insets(20, 150, 10, 10));
-
-		TextField movie = new TextField();
-		movie.setPromptText("Movie name");
-
-		gridPane.add(movie, 0, 0);
-
-		dialog.getDialogPane().setContent(gridPane);
-
-		dialog.setResultConverter(dialogButton -> {
-			if (dialogButton == ok) {
-				return new String(movie.getText());
-			}
-			return null;
-		});
-
-		Optional<String> result = dialog.showAndWait();
-		if (result.isPresent() && result.get().equals("111")) {
-			invalid();
-		}
-		if (result.isPresent() && result.get().isEmpty()) {
-			invalid();
-		}
-		if (result.isPresent() && !result.get().isEmpty()) {
-			rating(result.get());
-		}
-	
-	}
-	
-	private void rating(String name) {
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Movie Rating");
-		alert.setHeaderText(name + "'s overall rating is:");
-		String result = "3";
-		alert.setContentText(result);
-		alert.showAndWait();
-	}
-	
-	private void invalid() {
-		Alert alert = new Alert(AlertType.WARNING);
-		alert.setTitle("Invalid input");
-		alert.setHeaderText(null);
-		alert.setContentText("You haven't enter any input. Please try again.");
-
-		alert.showAndWait();
-	}
+//	private void searchDirector() {
+//		// Create the custom dialog.
+//		Dialog<String> dialog = new Dialog<>();
+//		dialog.setTitle("Search Filmography");
+//		dialog.setHeaderText("Enter the director's name :");
+//
+//		// Set the button types.
+//		ButtonType ok = new ButtonType("OK", ButtonData.OK_DONE);
+//		dialog.getDialogPane().getButtonTypes().addAll(ok, ButtonType.CANCEL);
+//
+//		GridPane gridPane = new GridPane();
+//		gridPane.setHgap(10);
+//		gridPane.setVgap(10);
+//		gridPane.setPadding(new Insets(20, 150, 10, 10));
+//
+//		TextField movie = new TextField();
+//		movie.setPromptText("Director name");
+//
+//		gridPane.add(movie, 0, 0);
+//		
+//		Text print = new Text();
+//		print.setText("You haven't enter any input. Please try again.\n");
+////		print.setVisible(false);
+//		print.setFill(Color.RED);
+//		gridPane.add(print, 0, 1);
+//
+//
+//		dialog.getDialogPane().setContent(gridPane);
+//
+//		dialog.setResultConverter(dialogButton -> {
+//			if (dialogButton == ok) {
+//				return new String(movie.getText());
+//			}
+//			return null;
+//		});
+//
+//		Optional<String> result = dialog.showAndWait();
+//		if (result.isPresent() && result.get().equals("111")) {
+//			invalid();
+//		}
+//		if (result.isPresent() && result.get().isEmpty()) {
+//			invalid();
+//		}
+//		if (result.isPresent() && !result.get().isEmpty()) {
+//			director(result.get());
+//		}
+//	
+//	}
+//	
+//	private void director(String name) {
+//		Alert alert = new Alert(AlertType.INFORMATION);
+//		alert.setTitle("Director's Filomography");
+//		alert.setHeaderText(name + " directs following movies:");
+//		String result = "Movie 3, Movie 4";
+//		alert.setContentText(result);
+//		alert.showAndWait();
+//	}
+//	
+//	private void searchActor() {
+//		// Create the custom dialog.
+//
+//
+//		Dialog<String> dialog = new Dialog<>();
+//		dialog.setTitle("Search Filmography");
+//		dialog.setHeaderText("Enter the actor's name :");
+//
+//		ButtonType submit = new ButtonType("ok", ButtonData.OTHER);
+//		dialog.getDialogPane().getButtonTypes().addAll(submit, ButtonType.CANCEL);
+//		
+//		Button sub = (Button) dialog.getDialogPane().lookupButton(submit);
+//
+//		GridPane gridPane = new GridPane();
+//		
+//		gridPane.setHgap(10);
+//		gridPane.setVgap(10);
+//		gridPane.setPadding(new Insets(20, 150, 10, 10));
+//
+//		TextField movie = new TextField();
+//		movie.setPromptText("Actor name");
+//		gridPane.add(movie, 0, 0);
+//		
+//		
+//		final Text output = new Text();
+//		gridPane.add(output, 0, 1);
+//		
+//		sub.addEventFilter(ActionEvent.ACTION, e ->{
+//			if (movie.getText() != null && !movie.getText().isEmpty()) {
+//				dialog.setContentText("gessssupppp");
+//				//output.setText(movie.getText() + " participates in:\n" + "Movie1, Movie 2");
+//				//output.setFill(Color.BLACK);
+//			}
+//			else {
+//				output.setText("You haven't enter any input. Please try again.");
+//				output.setFill(Color.RED);
+//			}
+//		});
+//		
+//		Button ok = new Button("OK");
+//		Button cancel = new Button("Cancel");
+//		HBox hb = new HBox();
+//		hb.getChildren().addAll(ok,cancel);
+//		
+//		hb.setAlignment(Pos.BOTTOM_RIGHT);
+//		gridPane.add(hb, 1, 2);
+//		cancel.setOnAction(new EventHandler<ActionEvent>() {
+//			@Override
+//			public void handle(ActionEvent event) {
+//				dialog.close();
+//			}
+//		});
+//		ok.setOnAction(new EventHandler<ActionEvent>() {
+//			@Override
+//			public void handle(ActionEvent event) {
+//				if (movie.getText() != null && !movie.getText().isEmpty()) {
+//					output.setText(movie.getText() + " participates in:\n" + "Movie1, Movie 2");
+//					output.setFill(Color.BLACK);
+//				}
+//				else {
+//					output.setText("You haven't enter any input. Please try again.");
+//					output.setFill(Color.RED);
+//				}
+//			}
+//		});
+//		dialog.getDialogPane().setContent(gridPane);
+//		
+//		Optional<String> result = dialog.showAndWait();
+//	
+//	}
+//	
+//	private void actor(String name) {
+//		Alert alert = new Alert(AlertType.INFORMATION);
+//		alert.setTitle("Actor's Filomography");
+//		alert.setHeaderText(name + " participates in following movies:");
+//		String result = "Movie 1, Movie 2";
+//		alert.setContentText(result);
+//		alert.showAndWait();
+//	}
+//	
+//	private void searchActMovie() {
+//		// Create the custom dialog.
+//		Dialog<String> dialog = new Dialog<>();
+//		dialog.setTitle("Search Movie Cast");
+//		dialog.setHeaderText("Enter the movie name :");
+//
+//		// Set the button types.
+//		ButtonType ok = new ButtonType("OK", ButtonData.OK_DONE);
+//		dialog.getDialogPane().getButtonTypes().addAll(ok, ButtonType.CANCEL);
+//
+//		GridPane gridPane = new GridPane();
+//		gridPane.setHgap(10);
+//		gridPane.setVgap(10);
+//		gridPane.setPadding(new Insets(20, 150, 10, 10));
+//
+//		TextField movie = new TextField();
+//		movie.setPromptText("Movie name");
+//
+//		gridPane.add(movie, 0, 0);
+//
+//		dialog.getDialogPane().setContent(gridPane);
+//
+//		dialog.setResultConverter(dialogButton -> {
+//			if (dialogButton == ok) {
+//				return new String(movie.getText());
+//			}
+//			return null;
+//		});
+//
+//		Optional<String> result = dialog.showAndWait();
+//		if (result.isPresent() && result.get().equals("111")) {
+//			invalid();
+//		}
+//		if (result.isPresent() && result.get().isEmpty()) {
+//			invalid();
+//		}
+//		if (result.isPresent() && !result.get().isEmpty()) {
+//			starringAct(result.get());
+//		}
+//	
+//	}
+//	
+//	private void starringAct(String movie) {
+//		Alert alert = new Alert(AlertType.INFORMATION);
+//		alert.setTitle("Movie Cast");
+//		alert.setHeaderText("Here is the cast of "+ movie);
+//		String result = "Actor A, Actor B, Actor C";
+//		alert.setContentText(result);
+//		alert.showAndWait();
+//	}
+//	
+//	private void searchDirMovie() {
+//		// Create the custom dialog.
+//		Dialog<String> dialog = new Dialog<>();
+//		dialog.setTitle("Search Movie Director");
+//		dialog.setHeaderText("Enter the movie name :");
+//
+//		// Set the button types.
+//		ButtonType ok = new ButtonType("OK", ButtonData.OK_DONE);
+//		dialog.getDialogPane().getButtonTypes().addAll(ok, ButtonType.CANCEL);
+//
+//		GridPane gridPane = new GridPane();
+//		gridPane.setHgap(10);
+//		gridPane.setVgap(10);
+//		gridPane.setPadding(new Insets(20, 150, 10, 10));
+//
+//		TextField movie = new TextField();
+//		movie.setPromptText("Movie name");
+//
+//		gridPane.add(movie, 0, 0);
+//
+//		dialog.getDialogPane().setContent(gridPane);
+//
+//		dialog.setResultConverter(dialogButton -> {
+//			if (dialogButton == ok) {
+//				return new String(movie.getText());
+//			}
+//			return null;
+//		});
+//
+//		Optional<String> result = dialog.showAndWait();
+//		if (result.isPresent() && result.get().equals("111")) {
+//			invalid();
+//		}
+//		if (result.isPresent() && result.get().isEmpty()) {
+//			invalid();
+//		}
+//		if (result.isPresent() && !result.get().isEmpty()) {
+//			directingDir(result.get());
+//		}
+//	
+//	}
+//	
+//	private void directingDir(String movie) {
+//		Alert alert = new Alert(AlertType.INFORMATION);
+//		alert.setTitle("Movie Director");
+//		alert.setHeaderText("Here is the director of "+ movie);
+//		String result = "Director John, Director Jane";
+//		alert.setContentText(result);
+//		alert.showAndWait();
+//	}
+//	
+//	private void searchRating() {
+//		// Create the custom dialog.
+//		Dialog<String> dialog = new Dialog<>();
+//		dialog.setTitle("Search Rating");
+//		dialog.setHeaderText("Enter the movie name :");
+//
+//		// Set the button types.
+//		ButtonType ok = new ButtonType("OK", ButtonData.OK_DONE);
+//		dialog.getDialogPane().getButtonTypes().addAll(ok, ButtonType.CANCEL);
+//
+//		GridPane gridPane = new GridPane();
+//		gridPane.setHgap(10);
+//		gridPane.setVgap(10);
+//		gridPane.setPadding(new Insets(20, 150, 10, 10));
+//
+//		TextField movie = new TextField();
+//		movie.setPromptText("Movie name");
+//
+//		gridPane.add(movie, 0, 0);
+//
+//		dialog.getDialogPane().setContent(gridPane);
+//
+//		dialog.setResultConverter(dialogButton -> {
+//			if (dialogButton == ok) {
+//				return new String(movie.getText());
+//			}
+//			return null;
+//		});
+//
+//		Optional<String> result = dialog.showAndWait();
+//		if (result.isPresent() && result.get().equals("111")) {
+//			invalid();
+//		}
+//		if (result.isPresent() && result.get().isEmpty()) {
+//			invalid();
+//		}
+//		if (result.isPresent() && !result.get().isEmpty()) {
+//			rating(result.get());
+//		}
+//	
+//	}
+//	
+//	private void rating(String name) {
+//		Alert alert = new Alert(AlertType.INFORMATION);
+//		alert.setTitle("Movie Rating");
+//		alert.setHeaderText(name + "'s overall rating is:");
+//		String result = "3";
+//		alert.setContentText(result);
+//		alert.showAndWait();
+//	}
+//	
+//	private void invalid() {
+//		Alert alert = new Alert(AlertType.WARNING);
+//		alert.setTitle("Invalid input");
+//		alert.setHeaderText(null);
+//		alert.setContentText("You haven't enter any input. Please try again.");
+//
+//		alert.showAndWait();
+//	}
 	
 }

@@ -3,6 +3,7 @@ package application;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.util.List;
 
 public class Database {
 	
@@ -26,6 +27,56 @@ public class Database {
 	
 	
 	}
+	
+	public Account retrieveAccount(String username) {
+		return null;
+	}
+	
+	public int getMaxUserId() {
+		return -1;
+	}
+	
+	public boolean createAccount(Account account) {
+		return false;
+	}
+	
+	public boolean updatePassword(Account account) {
+		return false;
+	}
+	
+	public boolean insertRating(Rate rating) {
+		return false;
+	}
+	
+	public Movie retrieveMovie(String name, int retrieveType) {
+		switch(retrieveType) {
+		case 1:
+			//search by Movie
+		case 2:
+			//search by Actor
+		case 3: 
+			//search by Director
+		}
+		return null;
+	}
+	
+	public double retrieveRating(Movie movie) {
+		return -1;
+	}
+	
+	public List<Actor> retrieveActor(String movieName){
+		return null;
+	}
+	
+	public List<Actor> retrieveRanking(int num, String movieName){
+		return null;
+	}
+	
+	public Director retrieveDirector(String movieName) {
+		return null;
+	}
+	
+	
 	
 	
 }

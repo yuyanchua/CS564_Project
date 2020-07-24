@@ -21,14 +21,16 @@ public class HomePage {
 	HBox btBox;
 	
 	Text bgInfo, inst;
-	
+
+	Account account;
 	Scene prevScene, currScene;
 	Stage stage;
 	
-	public HomePage(Stage stage, Scene previous) {
+	public HomePage(Stage stage, Scene previous, Account account) {
 		
 		this.stage = stage;
 		this.prevScene = previous;
+		this.account = account;
 		
 		setupBt();
 		setupText();
@@ -122,7 +124,7 @@ public class HomePage {
 		
 		btCompare.setOnAction(e -> new CompareMenu(stage, currScene));
 		
-		btAccount.setOnAction(e -> new AccountMenu(stage, currScene));
+		btAccount.setOnAction(e -> new AccountMenu(stage, currScene, account));
 		
 		
 		btBack.setOnAction(e -> {

@@ -29,8 +29,9 @@ public class UpdatePassword {
 	
 	Stage stage;
 
+	Account account;
 	
-	public UpdatePassword() {
+	public UpdatePassword(Account account) {
 		
 		setupGrid();
 		setupField();
@@ -128,7 +129,8 @@ public class UpdatePassword {
 		
 		errorMsg.setVisible(true);
 		if (!oldPass.isEmpty() && !newPass.isEmpty() && !confirmPass.isEmpty()) {
-			
+			//update pass
+			updatePass(newPass);
 		}
 		else {
 			errorMsg.setText("Please don't leave any field empty.");
@@ -136,7 +138,8 @@ public class UpdatePassword {
 	}
 	
 	private boolean validate(String oldPass) {
-		return false;
+		return (account.password.equals(oldPass));
+		
 	}
 	
 	private boolean validate(String newPass, String confirmPass) {
@@ -144,6 +147,12 @@ public class UpdatePassword {
 	}
 	
 	private void updatePass(String newPass) {
+		String user = this.account.username;
+		int userId = this.account.userId;
+		
+		Account account = new Account(user, newPass, userId);
+		boolean success = new Database().updatePassword(account);
+		
 		return;
 	}
 	

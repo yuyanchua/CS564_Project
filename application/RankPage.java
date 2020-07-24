@@ -20,7 +20,10 @@ public class RankPage {
 	TableView<Actor> actorTable;
 	ObservableList<Actor> record;
 	
-	public RankPage(int num) {
+	String movieName;
+	
+	public RankPage(int num, String movieName) {
+		this.movieName = movieName;
 		actorList = getActorList(num);
 		record = FXCollections.observableArrayList(actorList);
 		System.out.println(record.get(0));
@@ -69,8 +72,13 @@ public class RankPage {
 	
 	private List<Actor> getActorList(int num){
 		//Get list from database
-		List<Actor> list = new ArrayList<>();
-		list.add(new Actor(1, "james", "James", 1));
+		List<Actor> list = null;
+		try {
+			list = new Database().retrieveRanking(num, movieName);
+		}catch(Exception ex) {
+			list = new ArrayList<>();
+			list.add(new Actor(1, "james", "James", 1));
+		}
 		return list;
 	}
 }

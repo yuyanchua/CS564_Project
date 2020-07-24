@@ -111,24 +111,26 @@ public class CreateAccPage {
 	}
 	
 	private void createAccount() {
-		String username = tfUser.getText();
-
 		if(!pfPass.getText().equals(pfRepeat.getText())) {
 			errMsg.setText("Password not matched.");
 			errMsg.setVisible(true);
 			return;
 		}
 		
-		if(!pfPass.getText().isEmpty() ||pfRepeat.getText().isEmpty()) {
+		if(pfPass.getText().isEmpty() || pfRepeat.getText().isEmpty() || tfUser.getText().isEmpty()) {
 			errMsg.setText("Username or password is not enterd.");
 			errMsg.setVisible(true);
 			return;
 		}
 		
+		String username = tfUser.getText();
+
 		String password = pfPass.getText();
 		
+		int userId = new Database().getMaxUserId() + 1;
 		//Insert username, password to database
 		
+		new Database().createAccount(new Account(username, password, userId));
 		
 		stage.setScene(prevScene);
 		

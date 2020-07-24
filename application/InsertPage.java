@@ -210,8 +210,10 @@ public class InsertPage {
 //
 //	}
 	
-	private int getMovieId(String movie) {
-		return -1;
+	private int getMovieId(String movieName) {
+		Movie movie = new Database().retrieveMovie(movieName, 1);
+		
+		return movie.getMovieId();
 	}
 	
 	private void setupUserInput() {
@@ -244,9 +246,10 @@ public class InsertPage {
 			int movieId = getMovieId(movieName);
 			
 			Rate rate = new Rate(movieId, userId, rating);
-		}
+			new Database().insertRating(rate);
+		}	
 		else {
-			System.out.println("jere");
+			System.out.println("here");
 			errorMsg.setText("Please don't leave any field empty.");
 			errorMsg.setFill(Color.RED);
 			errorMsg.setVisible(true);

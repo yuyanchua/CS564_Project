@@ -136,10 +136,14 @@ public class LoginPage {
 	}
 	
 	private void login(String user, String pass) {
+
+		Account account = new Database().retrieveAccount(user);
+		
 		//Validation
-		boolean authorize = isAuthorize(user, pass);
+		boolean authorize = isAuthorize(user, pass, account);
+		
 		if(authorize) {
-			new HomePage(stage, scene);
+			new HomePage(stage, scene, account);
 		}else
 			if(user.isEmpty() || pass.isEmpty()) {
 				lbEmpty.setVisible(true);
@@ -148,10 +152,13 @@ public class LoginPage {
 			}	
 	}
 	
-	private boolean isAuthorize(String user, String pass) {
+	private boolean isAuthorize(String user, String pass, Account account) {
 		if(user.equals("user") && pass.equals("pass"))
 			return true;
 		if(user.equals("admin") && pass.equals("pass"))
+			return true;
+		
+		if(user.equals(account.username) && pass.equals(account.password))
 			return true;
 		return false;
 	}

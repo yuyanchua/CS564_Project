@@ -16,13 +16,17 @@ import javafx.stage.Stage;
 public class AccountMenu {
 	Button btDetails, btUpdate, btBack;
 	
+	Account account;
+	
 	VBox btBox;
 	
 	Stage stage;
 	Scene prevScene;
-	public AccountMenu(Stage stage, Scene prevScene) {
+	
+	public AccountMenu(Stage stage, Scene prevScene, Account account) {
 		this.stage = stage;
 		this.prevScene = prevScene;
+		this.account = account;
 		
 		setupButton();
 		setupBox();
@@ -61,7 +65,7 @@ public class AccountMenu {
 		btBack.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 15));
 		btBack.setStyle("-fx-text-base-color: #1849af;");
 		
-		btUpdate.setOnAction(e -> new UpdatePassword());
+		btUpdate.setOnAction(e -> new UpdatePassword(account));
 		btBack.setOnAction(e -> stage.setScene(prevScene));
 	}
 	
