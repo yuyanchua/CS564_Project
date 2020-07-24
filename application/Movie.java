@@ -1,13 +1,13 @@
 package application;
 
 public class Movie {
-	private int movieId;
-	private String title;
-	private int year;
-	private String country;
-	private double RTCriticsRating;
-	private double RTAudienceRating;
-	private int RTAudRateNum;
+	int movieId;
+	String title;
+	int year;
+	String country;
+	double RTCriticsRating;
+	double RTAudienceRating;
+	int RTAudRateNum;
 	
 	
 	public Movie(int movieId, String title, int year, String country, 

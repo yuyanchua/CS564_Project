@@ -9,7 +9,17 @@ public class Account {
 		this.username = username;
 		this.password = password;
 		this.userId  = userId;
-		
 	}
 
+	public String getUsername() {
+		return username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
 }
