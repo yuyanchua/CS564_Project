@@ -1,7 +1,8 @@
 package application;
 
+import java.sql.SQLException;
+
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -111,6 +112,12 @@ public class InsertPage {
 	private int getMovieId(String movieName) {
 //		List<Movie> movieList = new 
 		Movie movie = new Database().retrieveMovie(movieName);
+		if (movie == null) {
+			errorMsg.setText("This movie does not exist in our database.");
+			errorMsg.setFill(Color.RED);
+			errorMsg.setVisible(true);
+			return -1;
+		}
 		
 		return movie.getMovieId();
 	}
@@ -127,13 +134,8 @@ public class InsertPage {
 		
 		tfTitle = new TextField();
 		//tfUserId = new TextField();
-//		String score[] = {"5","4","3","2","1","0"};
-		String score[] = {"0", "1", "2", "3", "4", "5"};
-		ObservableList<String> items = FXCollections.observableArrayList(score);
-		
-		tfRating = new ComboBox<>();
-		tfRating.getItems().addAll(items);
-		tfRating.setValue(items.get(0));
+		String score[] = {"5","4","3","2","1","0"};
+		tfRating = new ComboBox<>(FXCollections.observableArrayList(score));
 		
 		grid.add(tfTitle, 1, 0);
 		//grid.add(tfUserId, 1, 1);
@@ -151,15 +153,23 @@ public class InsertPage {
 //			errorMsg.setVisible(true);
 //		}
 		String ratingText = tfRating.getValue();
+		//System.out.println("ratingText"+ratingText);
 		
 		//if (!movieName.isEmpty() && !tfUserId.getText().isEmpty() && !ratingText.isEmpty()) {
-		if (!movieName.isEmpty() && !ratingText.isEmpty()) {
+		if (!movieName.isEmpty() && ratingText != null) {
 			double rating = Double.parseDouble(ratingText);
 			
 			int movieId = getMovieId(movieName);
 			
 			Rate rate = new Rate(movieId, account.userId, rating);
-			new Database().insertRating(rate);
+			try {
+				new Database().insertRating(rate);
+			}catch(SQLException e) {
+				errorMsg.setText("You have already rated this movie");
+				errorMsg.setFill(Color.RED);
+				errorMsg.setVisible(true);
+			}
+			
 		}else {
 			//System.out.println("here");
 			errorMsg.setText("Please don't leave any field empty.");

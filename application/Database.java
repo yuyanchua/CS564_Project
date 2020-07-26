@@ -13,14 +13,11 @@ import java.util.List;
 
 public class Database {
 	
-	String databaseName = "movie";
-//	String user = "root";
+	String databaseName = "moviedb";
+	String user = "root";
 	String host = "localhost";
-//	String databaseUrl = "jdbc:mysql://" + host + "/" + databaseName + "?autoReconnect=true&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";	//jdbc:mysql://localhost/db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-	String databaseUrl = "jdbc:mysql://" + host + "/" + databaseName + "?autoReconnect=true&useSSL=false";
-//	String password = "";
-	String user = "Yuyan";
-	String password = "E!nherj@r526423";
+	String databaseUrl = "jdbc:mysql://" + host + "/" + databaseName + "?autoReconnect=true&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";	//jdbc:mysql://localhost/db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+	String password = "";
 	
 	Connection connection = null;
 	PreparedStatement statement = null; //with parameter
@@ -162,7 +159,7 @@ public class Database {
 		return -1;
 	}
 	
-	public int insertRating(Rate rating) {
+	public int insertRating(Rate rating) throws SQLException {
 		
 		try{
 			CallableStatement cStmt = connection.prepareCall("{call insertRateTable (?, ?, ?)}");
@@ -173,9 +170,10 @@ public class Database {
 			int rowAffected = cStmt.executeUpdate();
 			return rowAffected;
 		}catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException(); 
+			//e.printStackTrace();
 		}
-		return -1;
+		//return -1;
 	}
 	
 	public Movie retrieveMovie(String movieName) {
