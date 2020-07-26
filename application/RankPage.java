@@ -28,30 +28,15 @@ public class RankPage {
 	Button btOk;
 	VBox result;
 	Stage stage;
-	Text errorMsg;
 	
-	public RankPage(String movie) {
+	public RankPage(String movie, String actor) {
 		title = new Text();
 		title.setText("Movie Ranking");
 		title.setFill(Color.web("#1849af"));
 		title.setFont(Font.font("Abhaya",FontWeight.SEMI_BOLD, 25));
 		
-		errorMsg = new Text();
-		errorMsg.setFill(Color.RED);
-		errorMsg.setVisible(false);
-		
-		
 		String name = "Movie Name: " + movie;
-		String topActor = new Database().retrieveRanking(movie);
-		System.out.println("topActor"+topActor);
-		
-		if (topActor == null) {
-			System.out.println("????????");
-			errorMsg.setText("This movie is not in our database."); //到这里了但是没有显示error//好像是errormsg没setup好？
-			errorMsg.setFill(Color.RED);
-			errorMsg.setVisible(true);
-			return;
-		}
+//		String topActor = new Database().retrieveRanking(movie);
 		
 		Text nameText = new Text(name);
 		nameText.setFill(Color.web("#1849af"));
@@ -62,7 +47,7 @@ public class RankPage {
 		actorText.setFill(Color.web("#1849af"));
 		actorText.setFont(Font.font("Abhaya",FontWeight.SEMI_BOLD, 20));
 		
-		actorText.setText("Top Actor in the movie: " + topActor);
+		actorText.setText("Top Actor in the movie: " + actor);
 		
 		btOk = new Button("Ok");
 		btOk.setAlignment(Pos.CENTER);

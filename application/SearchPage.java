@@ -252,7 +252,13 @@ public class SearchPage{
 		
 		if (title.equals("Search Ranking")) {
 //			String movieName = inputMovie.getText();
-			showRanking(inputText);
+			String actorName = new Database().retrieveRanking(inputText);
+			if(actorName == null) {
+				notFound();
+				return;
+			}
+			new RankPage(inputText, actorName);
+//			showRanking(inputText);
 		}
 		
 //		else if(title.equals("Compare Movie")) {
@@ -262,7 +268,7 @@ public class SearchPage{
 		newStage.close();
 	}
 	
-	private void showRanking(String name) {
+//	private void showRanking(String name) {
 //		int num = 0;
 //		try {
 //			num = Integer.parseInt(input);
@@ -270,13 +276,13 @@ public class SearchPage{
 //			System.out.println("Please enter a number");
 //		}
 		
-		new RankPage(name);
+//		new RankPage(name);
 		
 //		if(num > 0 && num < 5)
 //			new RankPage(num, name).showTable();
 //		else
 //			return;
-	}
+//	}
 
 	
 	private void notFound() {
