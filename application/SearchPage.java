@@ -28,7 +28,7 @@ public class SearchPage{
 	TextField input;
 	
 	Text movieText;
-	TextField inputMovie;
+//	TextField inputMovie;
 	
 	HBox btBox;
 	VBox textBox;
@@ -114,8 +114,8 @@ public class SearchPage{
 			movieText = new Text();
 			movieText.setText("Enter Movie Name: ");
 			
-			inputMovie = new TextField();
-			inputMovie.setPromptText("Movie Name");
+//			inputMovie = new TextField();
+//			inputMovie.setPromptText("Movie Name");
 		}
 		
 		errTxt = new Text();
@@ -128,14 +128,14 @@ public class SearchPage{
 		textBox.setSpacing(5);
 		textBox.setAlignment(Pos.CENTER_LEFT);
 		
-		if(title.equals("Search Ranking")) {
-			movieText = new Text();
-			movieText.setText("Enter Movie Name: ");
+//		if(title.equals("Search Ranking")) {
+//			movieText = new Text();
+//			movieText.setText("Enter Movie Name: ");
 			
-			inputMovie = new TextField();
-			inputMovie.setPromptText("Movie Name");
-			textBox.getChildren().addAll(promptTxt, input, movieText, inputMovie, errTxt);
-		}else
+//			inputMovie = new TextField();
+//			inputMovie.setPromptText("Movie Name");
+//			textBox.getChildren().addAll(promptTxt, input, movieText, inputMovie, errTxt);
+//		}else
 			textBox.getChildren().addAll(promptTxt, input, errTxt);
 		
 	}
@@ -149,7 +149,7 @@ public class SearchPage{
 
 		String inputText = input.getText();
 
-		Movie movie = new Database().retrieveMovie(inputText, 1);
+		Movie movie = new Database().retrieveMovie(inputText);
 		if(movie == null) {
 			notFound();
 			return null;
@@ -175,48 +175,49 @@ public class SearchPage{
 		
 		if(title.equals("Search Filmography") && promptStr.equals("Actor's Name")) {
 			//search movie with actor
-			Movie movie = new Database().retrieveMovie(inputText, 2);
-			if(movie == null) {
+			List<String> list = new Database().retrieveMovie(inputText, true);
+			if(list	 == null || list.isEmpty()) {
 				notFound();
 				return;
 			}
 			
-			new ResultPage(movie, inputText, true).start();
+			new ResultPage(list, inputText, true, true).start();
 		}
 		
 		if(title.equals("Search Movie Cast") && promptStr.equalsIgnoreCase("Movie Name")) {
-			List<Actor> actorList = new Database().retrieveActor(inputText);
+			List<String> actorList = new Database().retrieveActor(inputText);
 			
 			if(actorList == null || actorList.isEmpty()) {
 				notFound();
 				return;
 			}
-			new ResultPage(actorList, inputText).start();
+			new ResultPage(actorList, inputText, true, false).start();
 		}
 		
 		if(title.equals("Search Movie Director") && promptStr.equalsIgnoreCase("Movie Name")) {
-			Director director = new Database().retrieveDirector(inputText);
+			List<String> dirList = new Database().retrieveDirector(inputText);
 			
-			if(director == null) {
+			if(dirList == null || dirList.isEmpty()) {
 				notFound();
 				return;
 			}
 			
-			new ResultPage(director, inputText).start();
+			new ResultPage(dirList, inputText, false, false).start();
 		}
 		
 		if(title.equals("Search Filmography") && promptStr.equalsIgnoreCase("Director's Name")) {
-			Movie movie = new Database().retrieveMovie(inputText, 3);
-			if(movie == null) {
+
+			List<String> list = new Database().retrieveMovie(inputText, false);
+			if(list == null || list.isEmpty()) {
 				notFound();
 				return;
 			}
 			
-			new ResultPage(movie, inputText, false).start();
+			new ResultPage(list, inputText, false, true).start();
 		}
 		
 		if(title.equals("Search Rating") && promptStr.equalsIgnoreCase("Movie Name")) {
-			Movie movie = new Database().retrieveMovie(inputText, 1);
+			Movie movie = new Database().retrieveMovie(inputText);
 			double rating = new Database().retrieveRating(movie);
 			
 			if(movie == null) {
@@ -229,8 +230,8 @@ public class SearchPage{
 		}
 		
 		if (title.equals("Search Ranking")) {
-			String movieName = inputMovie.getText();
-			showRanking(inputText, movieName);
+//			String movieName = inputMovie.getText();
+			showRanking(inputText);
 		}
 		
 		else if(title.equals("Compare Movie")) {
@@ -240,18 +241,20 @@ public class SearchPage{
 		newStage.close();
 	}
 	
-	private void showRanking(String input, String name) {
-		int num = 0;
-		try {
-			num = Integer.parseInt(input);
-		}catch(Exception ex) {
-			System.out.println("Please enter a number");
-		}
+	private void showRanking(String name) {
+//		int num = 0;
+//		try {
+//			num = Integer.parseInt(input);
+//		}catch(Exception ex) {
+//			System.out.println("Please enter a number");
+//		}
 		
-		if(num > 0 && num < 5)
-			new RankPage(num, name).showTable();
-		else
-			return;
+		new RankPage(name);
+		
+//		if(num > 0 && num < 5)
+//			new RankPage(num, name).showTable();
+//		else
+//			return;
 	}
 	
 	private void showCompare(String input) {
@@ -263,7 +266,7 @@ public class SearchPage{
 		}
 		
 		if(num > 0 && num < 5)
-			new ComparePage(num).showTable();
+			new ComparePage(num);
 		else
 			return;
 	}

@@ -211,7 +211,8 @@ public class InsertPage {
 //	}
 	
 	private int getMovieId(String movieName) {
-		Movie movie = new Database().retrieveMovie(movieName, 1);
+//		List<Movie> movieList = new 
+		Movie movie = new Database().retrieveMovie(movieName);
 		
 		return movie.getMovieId();
 	}
@@ -237,10 +238,10 @@ public class InsertPage {
 	
 	private void insertRating() {
 		String movieName = tfTitle.getText();
-		String userId = tfUserId.getText();
+		int userId = Integer.parseInt(tfUserId.getText());
 		String ratingText = tfRating.getText();
 		
-		if (!movieName.isEmpty() && !userId.isEmpty() && !ratingText.isEmpty()) {
+		if (!movieName.isEmpty() && !tfUserId.getText().isEmpty() && !ratingText.isEmpty()) {
 			double rating = Double.parseDouble(ratingText);
 			
 			int movieId = getMovieId(movieName);

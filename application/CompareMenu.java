@@ -76,7 +76,7 @@ public class CompareMenu {
 		btBox.setAlignment(Pos.CENTER);
 		
 		btRanking.setOnAction(e -> new SearchPage(stage, scene,
-				"Search Ranking", "number to show the top N actors").start());;
+				"Search Ranking", "Movie Name").start());;
 		btCompare.setOnAction(e -> new SearchPage(stage, scene,
 				"Compare Movie", "number of Movie to Compare").start());;
 		btBack.setOnAction(e -> stage.setScene(prevScene));

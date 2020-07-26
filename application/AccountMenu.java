@@ -14,7 +14,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class AccountMenu {
-	Button btDetails, btUpdate, btBack;
+	Button btDetails, btUpdate, btDelete, btBack;
 	
 	Account account;
 	
@@ -53,6 +53,7 @@ public class AccountMenu {
 	private void setupButton() {
 		btDetails = new Button("Account Details");
 		btUpdate = new Button("Update Password");
+		btDelete = new Button("Delete Account");
 		btBack = new Button("Back");
 
 		btDetails.setMinSize(90,20);
@@ -61,10 +62,15 @@ public class AccountMenu {
 		btUpdate.setMinSize(90,20);
 		btUpdate.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 15));
 		btUpdate.setStyle("-fx-text-base-color: #1849af;");
+		btDelete.setMinSize(90,20);
+		btDelete.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 15));
+		btDelete.setStyle("-fx-text-base-color: #1849af;");
 		btBack.setMinSize(90,20);
 		btBack.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 15));
 		btBack.setStyle("-fx-text-base-color: #1849af;");
 		
+		btDetails.setOnAction(e -> new DisplayAccount(account));
+		btDelete.setOnAction(e -> new DeleteAccount(account));
 		btUpdate.setOnAction(e -> new UpdatePassword(account));
 		btBack.setOnAction(e -> stage.setScene(prevScene));
 	}
@@ -74,7 +80,7 @@ public class AccountMenu {
 		btBox.setSpacing(15);
 		btBox.setPadding(new Insets(15, 15, 15, 15));
 		btBox.setAlignment(Pos.CENTER);
-		btBox.getChildren().addAll(btDetails, btUpdate, btBack);
+		btBox.getChildren().addAll(btDetails, btUpdate, btDelete, btBack);
 	}
 	
 	

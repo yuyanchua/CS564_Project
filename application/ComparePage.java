@@ -47,8 +47,9 @@ public class ComparePage {
 		List<Movie> movieList = new ArrayList<>();
 		try {
 			for(int i = 0; i < num; i ++) {
-				new SearchPage(this);
+				new SearchPage(this).start();
 			}
+//			showTable();
 		}catch(Exception ex) {
 			Movie movie1 = new Movie(1, "Test", 2000, "Test", 5.5, 5.5, 5);
 			Movie movie2 = new Movie(2, "Test1", 2001, "Test1", 5.51, 5.15, 15);

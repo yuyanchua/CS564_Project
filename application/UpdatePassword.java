@@ -151,7 +151,8 @@ public class UpdatePassword {
 		int userId = this.account.userId;
 		
 		Account account = new Account(user, newPass, userId);
-		boolean success = new Database().updatePassword(account);
+		this.account = account;
+		new Database().updatePassword(account);
 		
 		return;
 	}

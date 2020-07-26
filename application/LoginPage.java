@@ -158,6 +158,7 @@ public class LoginPage {
 		if(user.equals("admin") && pass.equals("pass"))
 			return true;
 		
+		System.out.println(account.username);
 		if(user.equals(account.username) && pass.equals(account.password))
 			return true;
 		return false;
