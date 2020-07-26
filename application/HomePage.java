@@ -70,9 +70,16 @@ public class HomePage {
 		bgInfo.setFont(Font.font("Abhaya",FontPosture.ITALIC, 20));
 		
 		inst = new Text();
-		inst.setText("Program Instruction");
-		inst.setFill(Color.web("#1849af"));
-		inst.setFont(Font.font("Abhaya",FontPosture.ITALIC, 20));
+		  inst.setText("Program Instructions\n"
+		    + "Rate: Enter movie name and a rating to rate a movie.\r\n" + 
+		    "Search: Query the database by input the movie, actor or director names accordingly. \r\n" + 
+		    "Compare: - Show the highest ranking actor in one movie by entering movie’s name\r\n" + 
+		    "-Compare the movies by entering the number of movies to compare and then enter \r\n the movie names accordingly. \r\n" + 
+		    "Account: -Show the account information\r\n" + 
+		    "-Update the password by confirming current password\r\n" + 
+		    "-Delete account by confirming the current password");
+		  inst.setFill(Color.web("#1849af"));
+		  inst.setFont(Font.font("Abhaya",FontPosture.ITALIC, 13));
 		
 	}
 	
@@ -98,7 +105,7 @@ public class HomePage {
 		btSearch.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 15));
 		btSearch.setStyle("-fx-text-base-color: #1849af;");
 		
-		btCompare = new Button("Compare");
+		btCompare = new Button("Highlights");
 		btCompare.setMinSize(90,20);
 		btCompare.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 15));
 		btCompare.setStyle("-fx-text-base-color: #1849af;");
@@ -114,7 +121,7 @@ public class HomePage {
 		btBack.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 15));
 		btBack.setStyle("-fx-text-base-color: #1849af;");
 		
-		btInsert.setOnAction(e -> new InsertPage(stage, currScene).start());
+		btInsert.setOnAction(e -> new InsertPage(stage, currScene, account).start());
 		
 //		btUpdate.setOnAction(e -> new UpdateMenu(stage, currScene));
 //		

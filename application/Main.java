@@ -1,4 +1,4 @@
-package application;
+ package application;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -39,7 +39,6 @@ public class Main extends Application {
 			startBt.setMinSize(200,45);
 			startBt.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 20));
 			startBt.setStyle("-fx-text-base-color: #1849af;");
-//			startBt.setOnAction(e -> new HomePage(primaryStage, scene));
 			startBt.setOnAction(e -> new LoginPage(primaryStage, scene));
 			
 			VBox vbox = new VBox();

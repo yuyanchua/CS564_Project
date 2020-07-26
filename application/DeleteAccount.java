@@ -45,6 +45,7 @@ public class DeleteAccount {
 		
 		stage.setTitle("Delete Account");
 		stage.setScene(scene);
+		stage.setAlwaysOnTop(true);
 		stage.show();
 
 	}
@@ -101,7 +102,10 @@ public class DeleteAccount {
 	private void deleteAccount() {
 		String password = pfPass.getText();
 		if(password.equals(account.password)) {
+			//System.out.println("here can?");
 			new Database().deleteAccount(account);
+			stage.close();
+			
 		}else {
 			errorMsg.setVisible(true);
 		}

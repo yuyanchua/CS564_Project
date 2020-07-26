@@ -1,9 +1,12 @@
 package application;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -25,12 +28,15 @@ public class InsertPage {
 	
 	Stage prevStage, stage;
 	Scene prevScene;
+	Account account;
 	
 	Button btAdd, btBack;
 	
 	TextField tfTitle, tfYear, tfCountry, tfRTCRating, tfRTAurRating;
 	TextField tfAudRateNum, tfDirectorName, tfActorName;
-	TextField tfRanking, tfUserId, tfRating;
+	TextField tfRanking;
+	//, tfUserId;
+	ComboBox<String> tfRating;
 	
 	Text errorMsg;
 	
@@ -40,9 +46,10 @@ public class InsertPage {
 	
 	int insertType; 
 	
-	public InsertPage(Stage prevStage, Scene prevScene) {
+	public InsertPage(Stage prevStage, Scene prevScene, Account account) {
 		this.prevStage = prevStage;
 		this.prevScene = prevScene ;
+		this.account = account;
 		
 		errorMsg = new Text();
 		errorMsg.setFill(Color.RED);
@@ -99,116 +106,7 @@ public class InsertPage {
 		
 	}
 	
-//	private void setupMovieInput() {
-//		Label lbTitle = new Label("Title: ");
-//		Label lbYear = new Label("Year: ");
-//		Label lbCountry = new Label("Country: ");
-//		Label lbRTCRating = new Label("RT Critics Rating: ");
-//		Label lbRTAurRating = new Label("RT Audience Rating: ");
-//		Label lbAudRateNum = new Label("RT Audience Rating Number: ");
-//		
-//		grid.add(lbTitle, 0, 0);
-//		grid.add(lbYear, 0, 1);
-//		grid.add(lbCountry, 0, 2);
-//		grid.add(lbRTCRating, 0, 3);
-//		grid.add(lbRTAurRating, 0, 4);
-//		grid.add(lbAudRateNum, 0, 5);
-//		
-//		
-//		tfTitle = new TextField();
-//		tfYear = new TextField();
-//		tfCountry = new TextField();
-//		tfRTCRating = new TextField();
-//		tfRTAurRating = new TextField();
-//		tfAudRateNum = new TextField();
-//		
-//		grid.add(tfTitle, 1, 0);
-//		grid.add(tfYear, 1, 1);
-//		grid.add(tfCountry, 1, 2);
-//		grid.add(tfRTCRating, 1, 3);
-//		grid.add(tfRTAurRating, 1, 4);
-//		grid.add(tfAudRateNum, 1, 5);
-//	}
-//	
-//	private void insertMovie() {
-//		
-//		int movieId = 0;
-//		String title = tfTitle.getText();
-//		int year = Integer.parseInt(tfTitle.getText());
-//		String country = tfTitle.getText();
-//		double RTCriticsRating = Double.parseDouble(tfRTCRating.getText());
-//		double RTAudienceRating = Double.parseDouble(tfRTAurRating.getText());
-//		int RTAudRateNum = Integer.parseInt(tfAudRateNum.getText());
-//		
-//		Movie movie = new Movie(movieId, title, year, country, RTCriticsRating, 
-//				RTAudienceRating, RTAudRateNum);
-//		
-//		//insert movie into database
-//		
-//	}
-//	
-//	private void setupDirectorInput() {
-//		Label lbDirectorName = new Label("Director Name: ");
-//		Label lbMovie = new Label("Directed Movie: ");
-//		
-//		grid.add(lbDirectorName, 0, 0);
-//		grid.add(lbMovie, 0, 1);
-//		
-//		tfDirectorName = new TextField();
-//		tfTitle = new TextField();
-//		
-//		grid.add(tfDirectorName, 1, 0);
-//		grid.add(tfTitle, 1, 1);
-//	}
-//	
-//	private void insertDirector() {
-//		String directorName = tfDirectorName.getText();
-//		String directorId = directorName.toLowerCase().replace(" ", "_");
-//		String movieName = tfTitle.getText();
-//		
-//		int movieId = getMovieId(movieName);
-//		
-//		Director director = new Director(directorId, directorName, movieId);
-//		
-//		
-//	}
-//	
-//	
-//	
-//	private void setupActorInput() {
-//		Label lbActorName = new Label("Actor Name: ");
-//		Label lbRanking = new Label("Ranking: ");
-//		Label lbMovie = new Label("Acted Movie: ");
-//		
-//		grid.add(lbActorName, 0, 0);
-//		grid.add(lbRanking, 0, 1);
-//		grid.add(lbMovie, 0, 2);
-//		
-//		tfActorName = new TextField();
-//		tfRanking = new TextField();
-//		tfTitle = new TextField();
-//		
-//		grid.add(tfActorName, 1, 0);
-//		grid.add(tfRanking, 1, 1);
-//		grid.add(tfTitle, 1, 2);
-//		
-//	}
-//	
-//	private void insertActor() {
-//		try {
-//			String movie = tfTitle.getText();
-//			String actorName = tfActorName.getText();
-//			int ranking = Integer.parseInt(tfRanking.getText());
-//			String actorId = actorName.toLowerCase().replace(" ", "_");
-//
-//			int movieId = getMovieId(movie);
-//			
-//			Actor actor = new Actor(movieId, actorId, actorName, ranking);
-//		}catch(Exception ex) {
-//			errorMsg.setVisible(true);
-//		}
-//
-//	}
+
 	
 	private int getMovieId(String movieName) {
 //		List<Movie> movieList = new 
@@ -220,37 +118,50 @@ public class InsertPage {
 	private void setupUserInput() {
 		//search movie or input movie name?
 		Label lbMovie = new Label("Movie: ");
-		Label lbUser = new Label("User: ");
+		//Label lbUser = new Label("User: ");
 		Label lbRating = new Label("Rating: ");
 		
 		grid.add(lbMovie, 0, 0);
-		grid.add(lbUser, 0, 1);
+		//grid.add(lbUser, 0, 1);
 		grid.add(lbRating, 0, 2);
 		
 		tfTitle = new TextField();
-		tfUserId = new TextField();
-		tfRating = new TextField();
+		//tfUserId = new TextField();
+//		String score[] = {"5","4","3","2","1","0"};
+		String score[] = {"0", "1", "2", "3", "4", "5"};
+		ObservableList<String> items = FXCollections.observableArrayList(score);
+		
+		tfRating = new ComboBox<>();
+		tfRating.getItems().addAll(items);
+		tfRating.setValue(items.get(0));
 		
 		grid.add(tfTitle, 1, 0);
-		grid.add(tfUserId, 1, 1);
+		//grid.add(tfUserId, 1, 1);
 		grid.add(tfRating, 1, 2);
 	}
 	
 	private void insertRating() {
 		String movieName = tfTitle.getText();
-		int userId = Integer.parseInt(tfUserId.getText());
-		String ratingText = tfRating.getText();
+		//int userId = 0;
+//		try {
+//			userId = Integer.parseInt(tfUserId.getText());
+//		}catch (IllegalArgumentException e){
+//			errorMsg.setText("User ID has to be an number.");
+//			errorMsg.setFill(Color.RED);
+//			errorMsg.setVisible(true);
+//		}
+		String ratingText = tfRating.getValue();
 		
-		if (!movieName.isEmpty() && !tfUserId.getText().isEmpty() && !ratingText.isEmpty()) {
+		//if (!movieName.isEmpty() && !tfUserId.getText().isEmpty() && !ratingText.isEmpty()) {
+		if (!movieName.isEmpty() && !ratingText.isEmpty()) {
 			double rating = Double.parseDouble(ratingText);
 			
 			int movieId = getMovieId(movieName);
 			
-			Rate rate = new Rate(movieId, userId, rating);
+			Rate rate = new Rate(movieId, account.userId, rating);
 			new Database().insertRating(rate);
-		}	
-		else {
-			System.out.println("here");
+		}else {
+			//System.out.println("here");
 			errorMsg.setText("Please don't leave any field empty.");
 			errorMsg.setFill(Color.RED);
 			errorMsg.setVisible(true);

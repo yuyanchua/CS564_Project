@@ -161,7 +161,7 @@ public class ResultPage {
 	private String convertToString(List<String> list) {
 		String str = "";
 		for(String temp: list) {
-			str += temp + ", \n";
+			str += temp + ", \t\n";
 		}
 		
 		return str;

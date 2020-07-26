@@ -19,10 +19,12 @@ public class InsertMenu {
 	Stage stage;
 	Scene prevScene, scene;
 	boolean admin;
+	Account account;
 	
-	public InsertMenu(Stage stage, Scene prevScene) {
+	public InsertMenu(Stage stage, Scene prevScene, Account account) {
 		this.stage = stage;
 		this.prevScene = prevScene;
+		this.account = account;
 		
 		setupButton();
 		setupVbox();
@@ -51,7 +53,7 @@ public class InsertMenu {
 		btRate = new Button("Insert Movie Rating");
 		btBack = new Button("Back");
 		
-		btRate.setOnAction(e -> new InsertPage(stage, scene).start());
+		btRate.setOnAction(e -> new InsertPage(stage, scene, account).start());
 		
 		btBack.setOnAction(e -> stage.setScene(prevScene));
 	}

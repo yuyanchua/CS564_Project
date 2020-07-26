@@ -141,7 +141,7 @@ public class LoginPage {
 		
 		//Validation
 		boolean authorize = isAuthorize(user, pass, account);
-		
+		//System.out.println("here");
 		if(authorize) {
 			new HomePage(stage, scene, account);
 		}else

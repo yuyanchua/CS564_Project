@@ -15,6 +15,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import java.sql.SQLException;
+
 import javafx.geometry.Insets;
 
 public class CreateAccPage {
@@ -130,7 +133,13 @@ public class CreateAccPage {
 		int userId = new Database().getMaxUserId() + 1;
 		//Insert username, password to database
 		
-		new Database().createAccount(new Account(username, password, userId));
+		try {
+			new Database().createAccount(new Account(username, password, userId));
+		} catch (SQLException e) {
+			errMsg.setText("Username already exists.");
+			errMsg.setVisible(true);
+			return;
+		}
 		
 		stage.setScene(prevScene);
 		

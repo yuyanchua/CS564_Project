@@ -1,5 +1,8 @@
 package application;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -28,6 +31,9 @@ public class CompareMenu {
 	
 	Scene scene;
 	
+	int resultNum = 0;
+	List<Movie> compareList;
+	
 	public CompareMenu(Stage stage, Scene prevScene) {
 		this.stage = stage;
 		this.prevScene = prevScene;
@@ -40,7 +46,7 @@ public class CompareMenu {
 		BorderPane border = new BorderPane();
 		border.setCenter(btBox);
 		Text top = new Text();
-		top.setText("            Compare Movie");
+		top.setText("            Highlights");
 		border.setTop(top);
 		top.setFill(Color.web("#1849af"));
 		top.setFont(Font.font("Abhaya",FontPosture.ITALIC, 41));
@@ -56,7 +62,7 @@ public class CompareMenu {
 	}
 	
 	private void setupButton() {
-		btRanking = new Button("Show Top Nth Ranking Actors");
+		btRanking = new Button("Show Movie Star");
 		btCompare = new Button("Compare Movie");
 		btBack = new Button("Back");
 		
@@ -77,71 +83,48 @@ public class CompareMenu {
 		
 		btRanking.setOnAction(e -> new SearchPage(stage, scene,
 				"Search Ranking", "Movie Name").start());;
-		btCompare.setOnAction(e -> new SearchPage(stage, scene,
-				"Compare Movie", "number of Movie to Compare").start());;
+//		btCompare.setOnAction(e -> new SearchPage(stage, scene,
+//				"Compare Movie", "number of Movie to Compare").start());;
+				
+//		btCompare.setOnAction(e -> compareMovie());
+		btCompare.setOnAction(e -> setCompare());
 		btBack.setOnAction(e -> stage.setScene(prevScene));
 	}
 	
-	/*
-	private void setupRankingDialog() {
-		rankDialog = new TextInputDialog();
-		rankDialog.setHeaderText("Show Actor Ranking of Top?");
-		rankDialog.setContentText("Enter a number");
+	private void setCompare() {
+		new CompareInputPage(this);
+//		int index = 0;
+//		compareList = new ArrayList<>();
 		
-		rankEvent = new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent e) {
-//				while(true) {
-					rankDialog.showAndWait();
-//					int num = Integer.parseInt(rankDialog.getEditor().getText());
-//					if(num > 0 && num < 5)
-//						break;
-//				
-//				}
-				showRanking();
-					
-			}
-		};
+		
+//		do {
+//			new SearchPage(this).start();
+//			index ++;
+//			
+//		}while(index < resultNum);
 	}
 	
-	private void showRanking() {
-		int num = 0;
-		try {
-			num = Integer.parseInt(rankDialog.getEditor().getText());
-		}catch(Exception ex) {
-			System.out.println("Please enter a number");
-		}
+	public void setMovieNum(int resultNum) {
+		this.resultNum = resultNum;
+		//get num
+//		CompareInputPage inputPage = new CompareInputPage();
+//		int resultNum = inputPage.getInputNum();
 		
-		if(num > 0 && num < 5)
-			new RankPage(num).showTable();
-		else
-			return;
+		System.out.println(resultNum);
+		
+//		SearchPage searchNum = new SearchPage(stage, scene, "Compare Movie", "Number of Movie to Compare");
+//		
+//		int resultNum = searchNum.getResultNum();
+		//for each num, get movie
+		
+		
+		//parse movie into compare page
+
 	}
 	
-	private void setupCompareDialog() {
-		compDialog = new TextInputDialog();
-		compDialog.setHeaderText("Show Number of Movie to Compare");
-		compDialog.setContentText("Enter a number");
-		Stage thisstage = (Stage) compDialog.getDialogPane().getScene().getWindow();
-		compEvent = new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent e) {
-				compDialog.showAndWait();
-				showCompare();
-			}
-		};
+	public void addMovie(Movie movie) {
+		compareList.add(movie);
+		System.out.println(movie);
 	}
-	
-	private void showCompare() {
-		int num = 0; 
-		try {
-			num = Integer.parseInt(compDialog.getEditor().getText());
-		}catch(Exception ex) {
-			
-		}
-		
-		if(num > 0 && num < 5)
-			new ComparePage(num).showTable();
-		else
-			return;
-	}
-	*/
+
 }

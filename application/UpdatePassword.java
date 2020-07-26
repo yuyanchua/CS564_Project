@@ -32,6 +32,7 @@ public class UpdatePassword {
 	Account account;
 	
 	public UpdatePassword(Account account) {
+		this.account = account;
 		
 		setupGrid();
 		setupField();
@@ -67,6 +68,7 @@ public class UpdatePassword {
 		stage = new Stage();
 		Scene scene = new Scene(border, 500, 400);
 		stage.setTitle("Change Password");
+		stage.setAlwaysOnTop(true);
 		stage.setScene(scene);
 		stage.show();
 		
@@ -123,22 +125,32 @@ public class UpdatePassword {
 			if(validate(newPass, confirmPass))
 				updatePass(newPass);
 			else
-				errorMsg.setText("Incorrect New Password");
+				errorMsg.setText("Incorrect new password");
 		else
-			errorMsg.setText("Incorrect Old Password");
+			errorMsg.setText("Incorrect old password");
 		
-		errorMsg.setVisible(true);
+//		errorMsg.setVisible(true);
 		if (!oldPass.isEmpty() && !newPass.isEmpty() && !confirmPass.isEmpty()) {
 			//update pass
-			updatePass(newPass);
+			if (newPass.equals(confirmPass)) {
+				
+				updatePass(newPass);
+			}
+			else {
+				errorMsg.setText("New password not matched.");
+			}
 		}
 		else {
 			errorMsg.setText("Please don't leave any field empty.");
 		}
+		errorMsg.setVisible(true);
 	}
 	
 	private boolean validate(String oldPass) {
-		return (account.password.equals(oldPass));
+		//System.out.println("!!!");
+		//System.out.println(this.account.getPassword());
+		//System.out.println(">>>>"+this.account.password.equals(oldPass));
+		return (this.account.password.equals(oldPass));
 		
 	}
 	
@@ -154,6 +166,7 @@ public class UpdatePassword {
 		this.account = account;
 		new Database().updatePassword(account);
 		
+		stage.close();
 		return;
 	}
 	

@@ -1,5 +1,6 @@
 package application;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.geometry.Insets;
@@ -33,9 +34,12 @@ public class SearchPage{
 	HBox btBox;
 	VBox textBox;
 	
-	ComparePage comparePage = null;
+	private int resultNum = 0;
+	List<Movie> movieList;
 	
-	boolean compare = false;
+//	ComparePage comparePage = null;
+//	CompareMenu menu;
+//	boolean compare = false;
 	
 //	int searchType;
 	
@@ -47,16 +51,26 @@ public class SearchPage{
 //		this.searchType = searchType;
 		this.title = title;
 		this.promptStr = promptStr;
-		compare = false;
+//		compare = false;
 	}
 	
+//	public SearchPage(ComparePage comparePage) {
+//		this.compare = true;
+//		this.comparePage = comparePage;
+//		this.title = "Search Filmography";
+//		this.promptStr = "Movie Name";
+//	}
 	
-	public SearchPage(ComparePage comparePage) {
-		this.compare = true;
-		this.comparePage = comparePage;
-		this.title = "Search Filmography";
-		this.promptStr = "Movie Name";
-	}
+//	public SearchPage(int compareNum) {
+//		this.title = "Search Filmography";
+//		this.promptStr = "Movie Name";
+//		movieList = new ArrayList<>();
+//		
+//		while(compareNum > 0) {
+//			start();
+//			compareNum --;
+//		}
+//	}
 	
 	
 	
@@ -89,9 +103,9 @@ public class SearchPage{
 		btBack.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 15));
 		btBack.setStyle("-fx-text-base-color: #1849af;");
 		
-		if(compare)
-			btOk.setOnAction(e -> returnOutput());
-		else
+//		if(compare)
+//			btOk.setOnAction(e -> returnOutput());
+//		else
 			btOk.setOnAction(e -> searchInput());
 		btBack.setOnAction(e -> newStage.close());
 		
@@ -140,25 +154,25 @@ public class SearchPage{
 		
 	}
 	
-	private Movie returnOutput() {
-		if(input.getText().isEmpty()) {
-			errTxt.setText("Empty input. Please try again!");
-			errTxt.setVisible(true);
-			return null;
-		}
-
-		String inputText = input.getText();
-
-		Movie movie = new Database().retrieveMovie(inputText);
-		if(movie == null) {
-			notFound();
-			return null;
-		}
-
-		comparePage.movieList.add(movie);
-		return movie;
-
-	}
+//	private Movie returnOutput() {
+//		if(input.getText().isEmpty()) {
+//			errTxt.setText("Empty input. Please try again!");
+//			errTxt.setVisible(true);
+//			return null;
+//		}
+//
+//		String inputText = input.getText();
+//
+//		Movie movie = new Database().retrieveMovie(inputText);
+//		if(movie == null) {
+//			notFound();
+//			return null;
+//		}
+//
+//		comparePage.movieList.add(movie);
+//		return movie;
+//
+//	}
 	
 	private void searchInput() {
 //		System.out.println(input.getText());
@@ -229,14 +243,21 @@ public class SearchPage{
 			
 		}
 		
+		if(title.equals("Search Filmography") && promptStr.equalsIgnoreCase("Movie Name")) {
+			Movie movie = new Database().retrieveMovie(inputText);
+			//if contains
+			movieList.add(movie);
+			System.out.println(movie);
+		}
+		
 		if (title.equals("Search Ranking")) {
 //			String movieName = inputMovie.getText();
 			showRanking(inputText);
 		}
 		
-		else if(title.equals("Compare Movie")) {
-			showCompare(inputText);
-		}
+//		else if(title.equals("Compare Movie")) {
+//			showCompare(inputText);
+//		}
 		
 		newStage.close();
 	}
@@ -256,20 +277,7 @@ public class SearchPage{
 //		else
 //			return;
 	}
-	
-	private void showCompare(String input) {
-		int num = 0; 
-		try {
-			num = Integer.parseInt(input);
-		}catch(Exception ex) {
-			
-		}
-		
-		if(num > 0 && num < 5)
-			new ComparePage(num);
-		else
-			return;
-	}
+
 	
 	private void notFound() {
 		errTxt.setText("Result not found. Please try again!");

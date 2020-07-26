@@ -21,13 +21,21 @@ public class ComparePage {
 	
 	int numRecord;
 	
-	public ComparePage(int num) {
-		//Search for records
-		this.numRecord = num;
-		movieList = searchMovie(num);
-		records = FXCollections.observableArrayList(movieList);
+//	public ComparePage(int num) {
+//		//Search for records
+//		this.numRecord = num;
+//		movieList = searchMovie(num);
+//		records = FXCollections.observableArrayList(movieList);
+//		setupTable();
+//	}
+	
+	public ComparePage(List<Movie> movieList) {
+		this.movieList = movieList;
+		this.records = FXCollections.observableArrayList(movieList);
 		setupTable();
+		
 	}
+		
 	
 	public void showTable() {
 		Stage tableStage = new Stage();
@@ -43,25 +51,24 @@ public class ComparePage {
 		tableStage.show();
 	}
 	
-	private List<Movie> searchMovie(int num){
-		List<Movie> movieList = new ArrayList<>();
-		try {
-			for(int i = 0; i < num; i ++) {
-				new SearchPage(this).start();
-			}
-//			showTable();
-		}catch(Exception ex) {
-			Movie movie1 = new Movie(1, "Test", 2000, "Test", 5.5, 5.5, 5);
-			Movie movie2 = new Movie(2, "Test1", 2001, "Test1", 5.51, 5.15, 15);
-			
-			movieList.add(movie1);
-			movieList.add(movie2);
-			
-		}
-		
-		
-		return movieList;
-	}
+//	private List<Movie> searchMovie(int num){
+//		List<Movie> movieList = new ArrayList<>();
+//		try {
+//			for(int i = 0; i < num; i ++) {
+//				new SearchPage(this).start();
+//			}
+//		}catch(Exception ex) {
+//			Movie movie1 = new Movie(1, "Test", 2000, "Test", 5.5, 5.5, 5);
+//			Movie movie2 = new Movie(2, "Test1", 2001, "Test1", 5.51, 5.15, 15);
+//			
+//			movieList.add(movie1);
+//			movieList.add(movie2);
+//			
+//		}
+//		
+//		
+//		return movieList;
+//	}
 	
 	
 //	int movieID;
