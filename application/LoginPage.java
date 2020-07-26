@@ -153,14 +153,20 @@ public class LoginPage {
 	}
 	
 	private boolean isAuthorize(String user, String pass, Account account) {
-		if(user.equals("user") && pass.equals("pass"))
-			return true;
-		if(user.equals("admin") && pass.equals("pass"))
-			return true;
+//		if(user.equals("user") && pass.equals("pass"))
+//			return true;
+//		if(user.equals("admin") && pass.equals("pass"))
+//			return true;
 		
-		System.out.println(account.username);
+		if(account == null) {
+			lbErr.setVisible(true);
+			return false;
+		}
+		
+//		System.out.println(account.username);
 		if(user.equals(account.username) && pass.equals(account.password))
 			return true;
+		
 		return false;
 	}
 	
