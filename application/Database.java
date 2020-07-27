@@ -13,11 +13,14 @@ import java.util.List;
 
 public class Database {
 	
-	String databaseName = "moviedb";
-	String user = "root";
+	String databaseName = "movie";
+//	String user = "root";
 	String host = "localhost";
-	String databaseUrl = "jdbc:mysql://" + host + "/" + databaseName + "?autoReconnect=true&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";	//jdbc:mysql://localhost/db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-	String password = "";
+//	String databaseUrl = "jdbc:mysql://" + host + "/" + databaseName + "?autoReconnect=true&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";	//jdbc:mysql://localhost/db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+	String databaseUrl = "jdbc:mysql://" + host + "/" + databaseName + "?autoReconnect=true&useSSL=false";
+//	String password = "";
+	String user = "Yuyan";
+	String password = "E!nherj@r526423";
 	
 	Connection connection = null;
 	PreparedStatement statement = null; //with parameter

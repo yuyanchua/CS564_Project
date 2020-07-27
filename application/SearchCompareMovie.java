@@ -112,10 +112,13 @@ public class SearchCompareMovie {
 		if(movieList.size() == compareNum) {
 			System.out.println(movieList.size());
 			new ComparePage(this.movieList).showTable();
+			stage.close();
 		}
 	}
 	
 	private void searchInput() {
+		boolean repeat = false;
+		
 		for(int i = 0; i < compareNum; i ++) {
 			
 			if(input[i].getText().isEmpty()) {
@@ -133,22 +136,36 @@ public class SearchCompareMovie {
 				break;
 			}
 			
+			repeat = isContain(movie);
+			
+			
 			if(!isContain(movie)) {
 				movieList.add(movie);
+			}else {
+				errText[i].setText("Repeated movie. Please try again!");
+				errText[i].setVisible(true);
+//				movieList.clear();
+//				break;
 			}
 			
 		}
+		
+		if(repeat)
+			movieList.clear();
+		
+		
 	}
 	
 	private boolean isContain(Movie movie) {
-		for(Movie temp: movieList) {
-			if(temp.title.equals(movie.title)) {
+		for(int i = 0; i < movieList.size(); i ++) {
+			Movie temp = movieList.get(i);
+			if(temp.title.equals(movie.title) || temp.movieId == movie.movieId) {
+				errText[i].setText("Repeated movie. Please try again!");
+				errText[i].setVisible(true);
 				return true;
 			}
-			
-			if(temp.movieId == movie.movieId)
-				return true;
 		}
+		
 		return false;
 	}
 	

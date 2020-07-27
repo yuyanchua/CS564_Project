@@ -136,6 +136,7 @@ public class InsertPage {
 		//tfUserId = new TextField();
 		String score[] = {"5","4","3","2","1","0"};
 		tfRating = new ComboBox<>(FXCollections.observableArrayList(score));
+		tfRating.setPromptText("Select a number");
 		
 		grid.add(tfTitle, 1, 0);
 		//grid.add(tfUserId, 1, 1);

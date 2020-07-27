@@ -232,13 +232,14 @@ public class SearchPage{
 		
 		if(title.equals("Search Rating") && promptStr.equalsIgnoreCase("Movie Name")) {
 			Movie movie = new Database().retrieveMovie(inputText);
-			double rating = new Database().retrieveRating(movie);
+			
 			
 			if(movie == null) {
 				notFound();
 				return;
 			}
 			
+			double rating = new Database().retrieveRating(movie);
 			new ResultPage(rating, inputText).start();
 			
 		}
