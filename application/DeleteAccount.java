@@ -26,11 +26,12 @@ public class DeleteAccount {
 	VBox textBox;
 	
 	Account account;
-	Stage stage;
+	Stage stage, newStage;
 	
-	public DeleteAccount(Account account) {
-		this.account = account;
-		stage = new Stage();
+	public DeleteAccount(Account account, Stage stage) {
+		this.account = new Database().retrieveAccount(account.getUsername());
+		newStage = new Stage();
+		this.stage = stage;
 		
 		setupText();
 		setupButton();
@@ -43,10 +44,10 @@ public class DeleteAccount {
 		
 		Scene scene = new Scene(border, 500, 400);
 		
-		stage.setTitle("Delete Account");
-		stage.setScene(scene);
-		stage.setAlwaysOnTop(true);
-		stage.show();
+		newStage.setTitle("Delete Account");
+		newStage.setScene(scene);
+		newStage.setAlwaysOnTop(true);
+		newStage.show();
 
 	}
 	
@@ -90,7 +91,7 @@ public class DeleteAccount {
 		btCancel.setStyle("-fx-text-base-color: #1849af;");
 		
 		btConfirm.setOnAction(e -> deleteAccount());
-		btCancel.setOnAction(e -> stage.close());
+		btCancel.setOnAction(e -> newStage.close());
 		
 		btBox = new HBox();
 		btBox.setSpacing(15);
@@ -102,15 +103,45 @@ public class DeleteAccount {
 	private void deleteAccount() {
 		String password = pfPass.getText();
 		if(password.equals(account.password)) {
-			//System.out.println("here can?");
 			new Database().deleteAccount(account);
+			confirmDelete();
+			newStage.close();
 			stage.close();
-			
 		}else {
 			errorMsg.setVisible(true);
 		}
 		
 		return;
+	}
+	
+	private void confirmDelete() {
+		BorderPane border = new BorderPane();
+		VBox vbox = new VBox();
+		Button btOk = new Button("Ok");
+		Text text =  new Text();
+		Stage stage = new Stage();
+		
+		text.setText("The Account has been successfully deleted. Program end");
+		text.setFill(Color.web("#1849af"));
+		text.setFont(Font.font("Abhaya",FontWeight.SEMI_BOLD, 20));
+	
+		btOk.setAlignment(Pos.CENTER);
+		btOk.setOnAction(e -> stage.close());
+		btOk.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 15));
+		btOk.setStyle("-fx-text-base-color: #1849af;");
+		
+		vbox.setSpacing(15);
+		vbox.setAlignment(Pos.CENTER);
+		vbox.setPadding(new Insets(15, 15, 15, 15));
+		vbox.getChildren().addAll(text, btOk);
+		
+		border.setStyle("-fx-background-color: #f8eadb;");
+		border.setCenter(vbox);
+		
+		Scene scene = new Scene(border, 600, 200);
+		stage.setScene(scene);
+		stage.setTitle("Account deleted");
+		stage.show();
 	}
 	
 }

@@ -1,6 +1,5 @@
 package application;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.FXCollections;
@@ -20,14 +19,6 @@ public class ComparePage {
 	ObservableList<Movie> records;
 	
 	int numRecord;
-	
-//	public ComparePage(int num) {
-//		//Search for records
-//		this.numRecord = num;
-//		movieList = searchMovie(num);
-//		records = FXCollections.observableArrayList(movieList);
-//		setupTable();
-//	}
 	
 	public ComparePage(List<Movie> movieList) {
 		this.movieList = movieList;
@@ -50,34 +41,6 @@ public class ComparePage {
 		tableStage.sizeToScene();
 		tableStage.show();
 	}
-	
-//	private List<Movie> searchMovie(int num){
-//		List<Movie> movieList = new ArrayList<>();
-//		try {
-//			for(int i = 0; i < num; i ++) {
-//				new SearchPage(this).start();
-//			}
-//		}catch(Exception ex) {
-//			Movie movie1 = new Movie(1, "Test", 2000, "Test", 5.5, 5.5, 5);
-//			Movie movie2 = new Movie(2, "Test1", 2001, "Test1", 5.51, 5.15, 15);
-//			
-//			movieList.add(movie1);
-//			movieList.add(movie2);
-//			
-//		}
-//		
-//		
-//		return movieList;
-//	}
-	
-	
-//	int movieID;
-//	String title;
-//	int year;
-//	String country;
-//	double RTCriticsRating;
-//	double RTAudienceRating;
-//	int RTAudRateNum;
 	
 	@SuppressWarnings("unchecked")
 	private void setupTable() {

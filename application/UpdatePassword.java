@@ -32,7 +32,7 @@ public class UpdatePassword {
 	Account account;
 	
 	public UpdatePassword(Account account) {
-		this.account = account;
+		this.account = new Database().retrieveAccount(account.getUsername());
 		
 		setupGrid();
 		setupField();
@@ -128,8 +128,6 @@ public class UpdatePassword {
 				errorMsg.setText("Incorrect new password");
 		else
 			errorMsg.setText("Incorrect old password");
-		
-//		errorMsg.setVisible(true);
 		if (!oldPass.isEmpty() && !newPass.isEmpty() && !confirmPass.isEmpty()) {
 			//update pass
 			if (newPass.equals(confirmPass)) {
@@ -147,11 +145,7 @@ public class UpdatePassword {
 	}
 	
 	private boolean validate(String oldPass) {
-		//System.out.println("!!!");
-		//System.out.println(this.account.getPassword());
-		//System.out.println(">>>>"+this.account.password.equals(oldPass));
 		return (this.account.password.equals(oldPass));
-		
 	}
 	
 	private boolean validate(String newPass, String confirmPass) {

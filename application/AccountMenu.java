@@ -70,7 +70,7 @@ public class AccountMenu {
 		btBack.setStyle("-fx-text-base-color: #1849af;");
 		
 		btDetails.setOnAction(e -> new DisplayAccount(account));
-		btDelete.setOnAction(e -> new DeleteAccount(account));
+		btDelete.setOnAction(e -> new DeleteAccount(account, this.stage));
 		btUpdate.setOnAction(e -> new UpdatePassword(account));
 		btBack.setOnAction(e -> stage.setScene(prevScene));
 	}

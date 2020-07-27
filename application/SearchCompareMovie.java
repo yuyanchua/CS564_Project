@@ -144,8 +144,6 @@ public class SearchCompareMovie {
 			}else {
 				errText[i].setText("Repeated movie. Please try again!");
 				errText[i].setVisible(true);
-//				movieList.clear();
-//				break;
 			}
 			
 		}

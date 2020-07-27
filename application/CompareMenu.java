@@ -1,6 +1,5 @@
 package application;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javafx.event.ActionEvent;
@@ -38,8 +37,6 @@ public class CompareMenu {
 		this.stage = stage;
 		this.prevScene = prevScene;
 		
-		//setupRankingDialog();
-		//setupCompareDialog();
 		setupButton();
 		
 		
@@ -83,42 +80,16 @@ public class CompareMenu {
 		
 		btRanking.setOnAction(e -> new SearchPage(stage, scene,
 				"Search Ranking", "Movie Name").start());;
-//		btCompare.setOnAction(e -> new SearchPage(stage, scene,
-//				"Compare Movie", "number of Movie to Compare").start());;
-				
-//		btCompare.setOnAction(e -> compareMovie());
 		btCompare.setOnAction(e -> setCompare());
 		btBack.setOnAction(e -> stage.setScene(prevScene));
 	}
 	
 	private void setCompare() {
 		new CompareInputPage(this);
-//		int index = 0;
-//		compareList = new ArrayList<>();
-		
-		
-//		do {
-//			new SearchPage(this).start();
-//			index ++;
-//			
-//		}while(index < resultNum);
 	}
 	
 	public void setMovieNum(int resultNum) {
 		this.resultNum = resultNum;
-		//get num
-//		CompareInputPage inputPage = new CompareInputPage();
-//		int resultNum = inputPage.getInputNum();
-		
-		System.out.println(resultNum);
-		
-//		SearchPage searchNum = new SearchPage(stage, scene, "Compare Movie", "Number of Movie to Compare");
-//		
-//		int resultNum = searchNum.getResultNum();
-		//for each num, get movie
-		
-		
-		//parse movie into compare page
 
 	}
 	

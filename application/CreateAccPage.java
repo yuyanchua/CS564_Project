@@ -131,7 +131,6 @@ public class CreateAccPage {
 		String password = pfPass.getText();
 		
 		int userId = new Database().getMaxUserId() + 1;
-		//Insert username, password to database
 		
 		try {
 			new Database().createAccount(new Account(username, password, userId));

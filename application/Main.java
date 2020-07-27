@@ -23,7 +23,6 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			
-			
 			BorderPane root = new BorderPane();
 	
 			Scene scene = new Scene(root, 500, 400);

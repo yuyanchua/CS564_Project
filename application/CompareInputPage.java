@@ -38,8 +38,6 @@ public class CompareInputPage {
 		stage.setScene(scene);
 		stage.show();
 		
-		
-		
 	}
 	
 	
@@ -82,9 +80,6 @@ public class CompareInputPage {
 	
 	private void retrieveValue() {
 		this.resultNum = Integer.parseInt(numBox.getValue());
-		
-//		menu.setMovieNum(resultNum);
-//		new SearchPage(resultNum);
 		new SearchCompareMovie(resultNum).start();
 		
 		stage.close();

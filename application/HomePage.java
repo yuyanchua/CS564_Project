@@ -73,7 +73,7 @@ public class HomePage {
 		  inst.setText("Program Instructions\n"
 		    + "Rate: Enter movie name and a rating to rate a movie.\r\n" + 
 		    "Search: Query the database by input the movie, actor or director names accordingly. \r\n" + 
-		    "Compare: - Show the highest ranking actor in one movie by entering movie’s name\r\n" + 
+		    "Compare: - Show the highest ranking actor in one movie by entering movie name\r\n" + 
 		    "-Compare the movies by entering the number of movies to compare and then enter \r\n the movie names accordingly. \r\n" + 
 		    "Account: -Show the account information\r\n" + 
 		    "-Update the password by confirming current password\r\n" + 
@@ -89,17 +89,6 @@ public class HomePage {
 		btInsert.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 15));
 		btInsert.setStyle("-fx-text-base-color: #1849af;");
 		
-//		btUpdate = new Button("Update");
-//		btUpdate.setMinSize(90,20);
-//		btUpdate.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 18));
-//		btUpdate.setStyle("-fx-text-base-color: #1849af;");
-//		
-//		btDelete = new Button("Delete");
-//		btDelete.setMinSize(90, 20);
-//		btDelete.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 18));
-//		btDelete.setStyle("-fx-text-base-color: #1849af;");
-		
-//		btList = new Button("List");
 		btSearch = new Button("Search");
 		btSearch.setMinSize(90,20);
 		btSearch.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 15));
@@ -122,10 +111,6 @@ public class HomePage {
 		btBack.setStyle("-fx-text-base-color: #1849af;");
 		
 		btInsert.setOnAction(e -> new InsertPage(stage, currScene, account).start());
-		
-//		btUpdate.setOnAction(e -> new UpdateMenu(stage, currScene));
-//		
-//		btDelete.setOnAction(e -> new DeleteMenu(stage, currScene));
 		
 		btSearch.setOnAction(e -> new SearchMenu(stage, currScene));
 		

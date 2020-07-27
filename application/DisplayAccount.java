@@ -21,7 +21,6 @@ public class DisplayAccount {
 	Button btBack;
 	
 	public DisplayAccount(Account account) {
-//		this.account = account;
 		this.account = new Database().retrieveAccount(account.username);
 		
 		Stage stage = new Stage();

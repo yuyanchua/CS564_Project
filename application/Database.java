@@ -13,14 +13,12 @@ import java.util.List;
 
 public class Database {
 	
-	String databaseName = "movie";
-//	String user = "root";
+	String databaseName = "moviedb";
+	String user = "root";
 	String host = "localhost";
-//	String databaseUrl = "jdbc:mysql://" + host + "/" + databaseName + "?autoReconnect=true&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";	//jdbc:mysql://localhost/db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-	String databaseUrl = "jdbc:mysql://" + host + "/" + databaseName + "?autoReconnect=true&useSSL=false";
-//	String password = "";
-	String user = "Yuyan";
-	String password = "E!nherj@r526423";
+	String databaseUrl = "jdbc:mysql://" + host + "/" + databaseName + "?autoReconnect=true&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";	
+	//jdbc:mysql://localhost/db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+	String password = "";
 	
 	Connection connection = null;
 	PreparedStatement statement = null; //with parameter
@@ -38,8 +36,6 @@ public class Database {
 		}
 	}
 	
-	//whether the input username is in the dataset and whether it matches with the password
-	//if both are yes, return true
 	public Account retrieveAccount(String username) {
 		String sqlQuery = "SELECT * FROM account a WHERE a.username = ?; ";
 
@@ -73,31 +69,20 @@ public class Database {
 	    	resultSet = state.executeQuery(sqlQuery);
 
 			if (resultSet.next() == false) {
-				//System.out.println(">>>111");
 				return -1;
 			  } else {
-				  //System.out.println(">>>2222");
 				  return resultSet.getInt(1);
 			}
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
-		//System.out.println(">>>33333");
 		return -1;
 	}
 	
 	//insert account
 	//The executeUpdate() method returns the number of rows affected by the SQL statement
 	public int createAccount(Account account) throws SQLException{
-//		String sp = "delimiter $$"+
-//		" Drop procedure if exists insertAccountTable"+
-//		" create procedure insertAccountTable (IN username VARCHAR(255), password VARCHAR(255), user_ID BIGINT)"+
-//		" begin"+
-//		" INSERT INTO account (username, password, user_ID)"+
-//		" VALUES (username, password, user_ID);"+
-//		" end $$"+
-//		" delimiter;";
 		try{
 			CallableStatement cStmt = connection.prepareCall("{call insertAccountTable (?, ?, ?)}");
 			cStmt.setString(1, account.getUsername());
@@ -105,29 +90,15 @@ public class Database {
 			cStmt.setInt(3, account.getUserId());
 
 			int rowAffected = cStmt.executeUpdate();
-//			if (rowAffected == 0) {
-//				throw new SQLException();
-//			} 
 			return rowAffected;
 		}catch (SQLException e) {
 			throw new SQLException(); 
-			//e.printStackTrace();
 		}
-		//return -1;
 	}
 
 	//delete own account
 	public int deleteAccount(Account account) {
-//		String sp = "delimiter $$"+
-//		" Drop procedure if exists deleteAccountTable"+
-//		" create procedure deleteAccountTable (IN input_username VARCHAR(255))"+
-//		" begin"+
-//		" DELETE from account where username = input_username; 
-//		" end $$"+
-//		" delimiter;";
-
 		try{
-			//System.out.println("account:::"+account.getUsername());
 			CallableStatement cStmt = connection.prepareCall("{call deleteAccountTable (?)}");
 			cStmt.setString(1, account.getUsername());
 
@@ -140,21 +111,12 @@ public class Database {
 	}
 	
 	public int updatePassword(Account account) {
-//		String sp ="delimiter $$"+
-//		" Drop procedure if exists updateAccountTable"+
-//		" create procedure updateAccountTable (IN input_username VARCHAR(255), input_password VARCHAR(255))"+
-//		" begin"+
-//		" update account set password = input_password where username = input_username;"+
-//		" end $$"+
-//		" delimiter;";
 		try{
-			System.out.println("place1");
 			CallableStatement cStmt = connection.prepareCall("{call updateAccountTable (?, ?)}");
 			cStmt.setString(1, account.getUsername());
 			cStmt.setString(2, account.getPassword());
 
 			int rowAffected = cStmt.executeUpdate();
-			System.out.println("place2");
 			return rowAffected;
 		}catch (SQLException e) {
 			e.printStackTrace();
@@ -174,9 +136,7 @@ public class Database {
 			return rowAffected;
 		}catch (SQLException e) {
 			throw new SQLException(); 
-			//e.printStackTrace();
 		}
-		//return -1;
 	}
 	
 	public Movie retrieveMovie(String movieName) {
@@ -263,7 +223,6 @@ public class Database {
 			System.out.println(movie.getTitle());
 			statement.setString(1, movie.getTitle());
 			resultSet = statement.executeQuery();
-			//System.out.println(resultSet.getFloat("AverageRating"));
 			while (resultSet.next()) {
 				aveRate = resultSet.getDouble("AverageRating");
 			}
@@ -297,8 +256,6 @@ public class Database {
 		return actorName;
 	}
 	
-	//given a movie, output its first-ranked actor
-	//can only input unique movie title
 	public String retrieveRanking(String movieName){
 		String actorName = null;
 		String sqlQuery = "SELECT a.actor_name"+

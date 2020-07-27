@@ -52,46 +52,7 @@ public class ResultPage {
 		result.setPadding(new Insets(15, 15, 15, 15));
 		result.setAlignment(Pos.CENTER);
 		result.getChildren().addAll(title, nameText, rateText, btOk);
-		
-//		setupButton();
 	}
-	
-//	public ResultPage(Movie movie, String input, boolean isActor) {
-//		String name = "";
-//		if(isActor)
-//			name = "Actor Name: " + input;
-//		else
-//			name = "Director Name: " + input;
-//		
-//		String movieName = "Movie Directed: " + movie.getTitle();
-//		
-//		Text nameText = new Text(name);
-//		Text movieText = new Text(movieName);
-//		
-//		result = new VBox();
-//		result.setSpacing(15);
-//		result.setPadding(new Insets(15, 15, 15, 15));
-//		result.setAlignment(Pos.CENTER);
-//		result.getChildren().addAll(nameText, movieText);
-//		
-//		setupButton();
-//	}
-	
-//	public ResultPage(List<String> dirList, String movie) {
-//		String movieName = "Movie Name: " + movie;
-//		String directorName = "Directed by: " + director.directorName;
-//		
-//		Text movieText = new Text(movieName);
-//		Text dirText = new Text(directorName);
-//		
-//		result = new VBox();
-//		result.setSpacing(15);
-//		result.setPadding(new Insets(15, 15, 15, 15));
-//		result.setAlignment(Pos.CENTER);
-//		result.getChildren().addAll(movieText, dirText);
-//		
-//		setupButton();
-//	}
 	
 	public ResultPage(List<String> list, String input, boolean isActor, boolean isMovie) {
 		
@@ -150,10 +111,6 @@ public class ResultPage {
 			
 			result.getChildren().addAll(title, movieText, nameText, btOk);
 		}
-		
-//		System.out.println(input);
-//		setupButton();
-
 	}
 	
 	
@@ -171,11 +128,7 @@ public class ResultPage {
 		
 		BorderPane border = new BorderPane();
 		
-		
-		
-//		border.setTop(title);
 		border.setCenter(result);
-//		border.setBottom(btOk);
 		border.setStyle("-fx-background-color: #f8eadb;");
 		
 		Scene scene = new Scene(border, 500, 600);
@@ -185,15 +138,4 @@ public class ResultPage {
 		stage.setScene(scene);
 		stage.show();
 	}
-	
-//	private void setupButton() {
-//		btOk = new Button("Ok");
-//		btOk.setAlignment(Pos.CENTER);
-//		btOk.setFont(Font.font("Abhaya", FontWeight.SEMI_BOLD, 15));
-//		btOk.setStyle("-fx-text-base-color: #1849af;");
-//		
-//		btOk.setOnAction(e -> stage.close());
-//	}
-	
-	
 }
