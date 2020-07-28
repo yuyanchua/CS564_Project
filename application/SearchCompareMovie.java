@@ -51,7 +51,7 @@ public class SearchCompareMovie {
 		border.setBottom(btBox);
 		border.setStyle("-fx-background-color: #f8eadb;");
 		
-		Scene scene = new Scene(border, 500, 650);
+		Scene scene = new Scene(border, 500, 200+100*(compareNum));
 		
 		stage = new Stage();
 		stage.setScene(scene);
@@ -118,15 +118,23 @@ public class SearchCompareMovie {
 	
 	private void searchInput() {
 		boolean repeat = false;
-		
+		for(int p=0; p<compareNum; p++) {
+			errText[p].setVisible(false);
+		}
 		for(int i = 0; i < compareNum; i ++) {
 			
 			if(input[i].getText().isEmpty()) {
 				errText[i].setText("Empty input. Please try again!");
 				errText[i].setVisible(true);
+				for(int k = i+1; k< compareNum; k++) {
+					if(input[k].getText().isEmpty()) {
+						errText[k].setText("Empty input. Please try again!");
+						errText[k].setVisible(true);
+					}
+				}
 				return;
 			}
-			
+
 			String inputText = input[i].getText();
 			Movie movie = new Database().retrieveMovie(inputText);
 			if(movie == null) {
